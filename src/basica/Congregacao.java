@@ -1,11 +1,12 @@
 package basica;
 
-import java.util.Collection;
+//import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+
 
 @Entity
 public class Congregacao {
@@ -21,7 +22,7 @@ public class Congregacao {
 	private Endereco endereco;
 	@OneToOne
 	private Usuario usuario;	
-	private Collection<String> imagens;
+	//private Collection<String> imagens;
 
 	public Integer getId() {
 		return id;
@@ -79,12 +80,12 @@ public class Congregacao {
 		this.usuario = usuario;
 	}
 
-	public Collection<String> getImagens() {
+	/*public Collection<String> getImagens() {
 		return imagens;
 	}
 
 	public void setImagens(Collection<String> imagens) {
 		this.imagens = imagens;
-	}
+	}*/
 
 }
