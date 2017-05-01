@@ -12,16 +12,16 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
              version="2.0">
     <persistence-unit name="goToChurchUnit" transaction-type="RESOURCE_LOCAL">
-        <class>org.hibernate.jpa.test.pack.defaultpar.Lighter</class>
-        <validation-mode>CALLBACK</validation-mode>
+       <class>org.hibernate.jpa.test.pack.defaultpar.Lighter</class> 
+        <!-- <validation-mode>CALLBACK</validation-mode> -->
         <properties>
-            <property name="hibernate.dialect" value="PostgreSQLDialect"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
             <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
             <property name="hibernate.connection.username" value="postgres"/>
             <property name="hibernate.connection.password" value="postgres"/>
-            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/goToChurchDB2"/>
+            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/gotochurchdb2"/>
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
-            <property name="hibernate.cache.region.factory_class" value="org.hibernate.testing.cache.CachingRegionFactory" />
+            <!-- <property name="hibernate.cache.region.factory_class" value="org.hibernate.testing.cache.CachingRegionFactory" /> -->
         </properties>
     </persistence-unit>
 </persistence>
