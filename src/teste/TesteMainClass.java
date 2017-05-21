@@ -9,7 +9,7 @@ public class TesteMainClass {
 	public static void main(String[] args) {
 		
 
-		//EntityManagerFactory emf = Persistence.createEntityManagerFactory("goToChurchUnit");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("goToChurchUnit");
 		//EntityManager em = emf.createEntityManager();		
 		//em.close();
 	}
