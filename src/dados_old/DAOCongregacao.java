@@ -1,10 +1,10 @@
-package dados;
+package dados_old;
 
 import javax.persistence.EntityManagerFactory;
 
 import basica.Congregacao;
 
-public class DAOCongregacao extends DAOGenerico<Congregacao> implements IDAOCongregacao {
+public class DAOCongregacao extends DAOGenerico<Congregacao>{
 
 	public DAOCongregacao(EntityManagerFactory emf) {
 		super(emf);

@@ -1,6 +1,5 @@
-package dados;
+package dados_old;
 
-import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
 import java.util.List;
 
@@ -10,16 +9,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 
-public abstract class DAOGenerico<Entidade>{
+public class DAOGenerico<Entidade>{
 
-	//private EntityManagerFactory entityManagerFactory;
-	private Class<Entidade> persistentClass;
-	
-	@SuppressWarnings("unchecked")
-	public DAOGenerico() {
-		//this.setEntityManagerFactory(emf);
-		ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
-		persistentClass = (Class<Entidade>) parameterizedType.getActualTypeArguments()[0];
+	private EntityManagerFactory entityManagerFactory;
+
+	public DAOGenerico(EntityManagerFactory emf) {
+		this.setEntityManagerFactory(emf);
 	}
 
 	public Entidade update(Entidade objeto) {

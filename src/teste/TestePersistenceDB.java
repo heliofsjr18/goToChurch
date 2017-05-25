@@ -10,9 +10,9 @@ import org.junit.Test;
 import basica.Endereco;
 import basica.TipoUsuario;
 import basica.Usuario;
-import dados.DAOEndereco;
-import dados.DAOTipoUsuario;
-import dados.DAOUsuario;
+import dados_old.DAOEndereco;
+import dados_old.DAOTipoUsuario;
+import dados_old.DAOUsuario;
 
 public class TestePersistenceDB {
 
