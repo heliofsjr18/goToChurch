@@ -11,13 +11,14 @@ import basica.Endereco;
 import basica.TipoUsuario;
 import basica.Usuario;
 import dados.DAOEndereco;
+import dados.DAOFactory;
 import dados.DAOTipoUsuario;
 import dados.DAOUsuario;
 
 public class TestePersistenceDB {
 
 	@Test
-	public void persistenceTest(){
+	public void persistenceTest() throws Exception{
 		
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("goToChurchUnit");
 		
@@ -53,13 +54,13 @@ public class TestePersistenceDB {
 		//End Set Usuario
 		
 		//Executing DAOs
-		DAOTipoUsuario dT = new DAOTipoUsuario(emf);
+		DAOTipoUsuario dT = new DAOTipoUsuario(new DAOFactory().factory.createEntityManager());
 		dT.insert(t);
 		
-		DAOEndereco dE = new DAOEndereco(emf);
+		DAOEndereco dE = new DAOEndereco(new DAOFactory().factory.createEntityManager());
 		dE.insert(e);
 		
-		DAOUsuario dU = new DAOUsuario(emf);
+		DAOUsuario dU = new DAOUsuario(new DAOFactory().factory.createEntityManager());
 		dU.insert(u);
 		//End Executing DAOs
 		

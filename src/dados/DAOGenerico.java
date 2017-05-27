@@ -1,5 +1,6 @@
 package dados;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
 import java.util.List;
 
@@ -9,101 +10,109 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 
-public class DAOGenerico<Entidade> {
+import util.DadosException;
 
-	private EntityManagerFactory entityManagerFactory;
+public abstract class DAOGenerico<Entidade>{
 
-	public DAOGenerico(EntityManagerFactory emf) {
-		this.setEntityManagerFactory(emf);
+	EntityManager entityManager;
+	private Class<Entidade> persistentClass;
+	
+	@SuppressWarnings("unchecked")
+	public DAOGenerico(EntityManager entityManager) {
+		this.entityManager = entityManager;
+		ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
+		persistentClass = (Class<Entidade>) parameterizedType.getActualTypeArguments()[0];
 	}
 
-	public Entidade update(Entidade objeto) {
+	public Entidade update(Entidade objeto) throws DadosException {
 
-		EntityManager em = this.entityManagerFactory.createEntityManager();
+		//EntityManager em = DAOFactory.factory.createEntityManager();
 
-		EntityTransaction tx = em.getTransaction();
+		EntityTransaction tx = this.entityManager.getTransaction();
 		tx.begin();
 
-		objeto = em.merge(objeto);
+		objeto = this.entityManager.merge(objeto);
 
 		tx.commit();
 
-		em.close();
+		this.entityManager.close();
 
 		return objeto;
 	}
 
-	public final List<Entidade> getAll() {
+	@SuppressWarnings("unchecked")
+	public final List<Entidade> getAll() throws DadosException {
 		List<Entidade> instance = null;
-		EntityManager em = this.entityManagerFactory.createEntityManager();
+		//EntityManager em = DAOFactory.factory.createEntityManager();
 
 		try {
-			// instance = ((List<Entity>) em.createQuery("from " +
-			// getPersistentClass().getName()).getResultList());
-		} catch (RuntimeException re) {
-			re.printStackTrace();
+			
+			instance = (List<Entidade>) this.entityManager.createQuery("SELECT objetoGenerico FROM " + getPersistentClass().getName()).getResultList();
+			
+		} catch (Exception re) {
+			throw new DadosException(re.getMessage());
 		}
-		em.close();
+		this.entityManager.close();
 		return instance;
 	}
 
-	public void insert(Entidade objeto) {
-		EntityManager em = this.entityManagerFactory.createEntityManager();
-		EntityTransaction tx = em.getTransaction();
+
+	public void insert(Entidade objeto) throws DadosException {
+		//EntityManager em = DAOFactory.factory.createEntityManager();
+		EntityTransaction tx = this.entityManager.getTransaction();
 		try {
 			tx.begin();
-			em.persist(objeto);
+			this.entityManager.persist(objeto);
 			tx.commit();
-			em.close();
+			this.entityManager.close();
 		} catch (PersistenceException e) {
 			tx.rollback();
+			throw new DadosException(e.getMessage());
 		}
 	}
 
-	public final void insertCollection(Collection<Entidade> colecao) {
-		EntityManager em = this.entityManagerFactory.createEntityManager();
+	public final void insertCollection(Collection<Entidade> colecao) throws DadosException {
+		//EntityManager em = DAOFactory.factory.createEntityManager();
 		try {
-			EntityTransaction tx = em.getTransaction();
+			EntityTransaction tx = this.entityManager.getTransaction();
 			tx.begin();
 
 			for (Entidade entidade : colecao) {
-				em.persist(entidade);
+				this.entityManager.persist(entidade);
 			}
 
 			tx.commit();
 
-			em.close();
+			this.entityManager.close();
 		} catch (PersistenceException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public final void remove(Entidade objeto) {
-		EntityManager em = this.entityManagerFactory.createEntityManager();
-		EntityTransaction tx = em.getTransaction();
+	public final void remove(Entidade objeto) throws DadosException {
+		//EntityManager em = DAOFactory.factory.createEntityManager();
+		EntityTransaction tx = this.entityManager.getTransaction();
 		tx.begin();
 
-		objeto = em.merge(objeto);
+		objeto = this.entityManager.merge(objeto);
 
-		em.remove(objeto);
+		this.entityManager.remove(objeto);
 
 		tx.commit();
 
-		em.close();
+		this.entityManager.close();
 	}
 
 	public final void refresh(Entidade object) {
-		EntityManager em = this.entityManagerFactory.createEntityManager();
-		em.refresh(object);
-		em.close();
+		//EntityManager em = DAOFactory.factory.createEntityManager();
+		this.entityManager.refresh(object);
+		this.entityManager.close();
 	}
 
-	public EntityManagerFactory getEntityManagerFactory() {
-		return entityManagerFactory;
-	}
-
-	public void setEntityManagerFactory(EntityManagerFactory entityManagerFactory) {
-		this.entityManagerFactory = entityManagerFactory;
+	
+	protected final Class<Entidade> getPersistentClass() {
+		
+		return persistentClass;
 	}
 
 }
