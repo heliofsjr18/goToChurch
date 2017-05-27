@@ -1,13 +1,13 @@
 package dados;
 
-import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityManager;
 
 import basica.Area;
 
 public class DAOArea extends DAOGenerico<Area> implements IDAOArea {
 
-	public DAOArea(EntityManagerFactory emf) {
-		super(emf);
+	public DAOArea(EntityManager entityManager) {
+		super(entityManager);
 	}
 
 	

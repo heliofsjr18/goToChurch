@@ -1,5 +1,7 @@
 package negocio;
 
-public class RNTipoUsuario {
+import dados.DAOFactory;
+
+public class RNTipoUsuario {	
 
 }
