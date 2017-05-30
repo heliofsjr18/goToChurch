@@ -6,12 +6,12 @@ import javax.persistence.Persistence;
 
 public class TesteMainClass {
 
-	public static void main(String[] args) {
+	//public static void main(String[] args) {
 		
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("goToChurchUnit");
 		//EntityManager em = emf.createEntityManager();		
 		//em.close();
-	}
+	//}
 
 }
