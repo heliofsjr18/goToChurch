@@ -23,6 +23,8 @@ public class Usuario {
 	private TipoUsuario tipoUsuario;
 	@OneToOne
 	private Endereco endereco;
+	private String login;
+	private String senha;
 
 	public Integer getId() {
 		return id;
@@ -94,6 +96,22 @@ public class Usuario {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 }

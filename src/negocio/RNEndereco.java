@@ -15,7 +15,7 @@ public class RNEndereco {
 		daoFactory = new DAOFactory();
 	}
 
-	private void verificaPreenchimento(Endereco e) throws NegocioException {
+	public void verificaPreenchimento(Endereco e) throws NegocioException {
 		
 		if (e == null) {
 			throw new NegocioException("Objeto não preenchido!");

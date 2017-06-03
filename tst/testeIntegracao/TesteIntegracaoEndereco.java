@@ -3,16 +3,20 @@ package testeIntegracao;
 import org.junit.Test;
 
 import basica.Endereco;
-import dados.DAOEndereco;
 import dados.DAOFactory;
+import fachada.Fachada;
 import util.DadosException;
+import util.NegocioException;
 
 public class TesteIntegracaoEndereco {
 
 	DAOFactory daoFactory = new DAOFactory();
 	
+	Fachada fachada = new Fachada();
+	
+	
 	@Test(expected=DadosException.class)
-	public void testarInserirEndereco() throws DadosException{
+	public void testarInserirEndereco() throws DadosException, NegocioException{
 		
 		Endereco endereco = new Endereco();
 		endereco.setBairro("teste Bairro");
@@ -21,14 +25,14 @@ public class TesteIntegracaoEndereco {
 		endereco.setLogradouro("Teste logradouro");
 		endereco.setNumero("Teste Numero");
 		
-		DAOEndereco daoEndereco = daoFactory.getDAOEndereco();
-		daoEndereco.insert(endereco);
+		daoFactory.getDAOEndereco();
+		fachada.enderecoInserir(endereco);
 		
 	}
 	
 	
 	@Test(expected=DadosException.class)
-	public void testarRemoverEndereco() throws DadosException{
+	public void testarRemoverEndereco() throws DadosException, NegocioException{
 		
 		Endereco endereco = new Endereco();
 		endereco.setBairro("teste Bairro");
@@ -37,35 +41,33 @@ public class TesteIntegracaoEndereco {
 		endereco.setLogradouro("Teste logradouro");
 		endereco.setNumero("Teste Numero");
 		
-		DAOEndereco daoEndereco = daoFactory.getDAOEndereco();
-		daoEndereco.remove(endereco);
+		daoFactory.getDAOEndereco();
+		fachada.enderecoExcluir(endereco);
 		
 	}
 	
 	
 	@Test(expected=DadosException.class)
-	public void testarAtualizarEndereco() throws DadosException{
+	public void testarAtualizarEndereco() throws DadosException, NegocioException{
 		
 		Endereco endereco = new Endereco();
 		endereco.setBairro("teste Bairro");
 		endereco.setCidade("Teste cidade");
-		endereco.setComplemento("Teste complemento");
+		endereco.setComplemento("Teste complemento Atualizar");
 		endereco.setLogradouro("Teste logradouro");
 		endereco.setNumero("Teste Numero");
 		
-		DAOEndereco daoEndereco = daoFactory.getDAOEndereco();
-		daoEndereco.update(endereco);
+		daoFactory.getDAOEndereco();
+		fachada.enderecoAlterar(endereco);
 		
 	}
 	
 	
 	@Test(expected=DadosException.class)
-	public void testarListarEndereco() throws DadosException{			
+	public void testarListarEndereco() throws DadosException, NegocioException{			
 		
-		DAOEndereco daoEndereco = daoFactory.getDAOEndereco();
-		daoEndereco.getAll();
+		daoFactory.getDAOEndereco();
+		fachada.enderecoListar();
 		
-	}
-	
-	
+	}	
 }

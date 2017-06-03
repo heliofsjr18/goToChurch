@@ -1,8 +1,6 @@
 package basica;
 
 import java.util.Collection;
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

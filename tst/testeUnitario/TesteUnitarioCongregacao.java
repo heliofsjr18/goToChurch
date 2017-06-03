@@ -3,6 +3,7 @@ package testeUnitario;
 import org.junit.Test;
 
 import basica.Congregacao;
+import negocio.RNCongregacao;
 import util.NegocioException;
 
 public class TesteUnitarioCongregacao {
@@ -10,13 +11,16 @@ public class TesteUnitarioCongregacao {
 	Congregacao congregacao = new Congregacao();
 	
 	
-	@Test
+	@Test(expected=NegocioException.class)
 	public void testeValidaNome() throws NegocioException{
 		congregacao.setNome("");
-		congregacao.setNome("aa");		
+		congregacao.setNome("aa");
+		
+		RNCongregacao rnCongregacao = new RNCongregacao();
+		rnCongregacao.verificaPreenchimento(congregacao);
 	}
 	
-	@Test
+	@Test(expected=NegocioException.class)
 	public void testeValidaQtdAssentos() throws NegocioException{
 		congregacao.setQtdAssentos(0);
 		congregacao.setQtdAssentos(1);
@@ -27,12 +31,18 @@ public class TesteUnitarioCongregacao {
 		congregacao.setQtdAssentos(6);
 		congregacao.setQtdAssentos(7);
 		congregacao.setQtdAssentos(8);
+		
+		RNCongregacao rnCongregacao = new RNCongregacao();
+		rnCongregacao.verificaPreenchimento(congregacao);
 	}
 	
-	@Test
+	@Test(expected=NegocioException.class)
 	public void testeValidaCoordenador() throws NegocioException{
 		congregacao.setCoordenador("");
-		congregacao.setNome("cc");		
+		congregacao.setNome("cc");
+		
+		RNCongregacao rnCongregacao = new RNCongregacao();
+		rnCongregacao.verificaPreenchimento(congregacao);
 	}
 	
 	

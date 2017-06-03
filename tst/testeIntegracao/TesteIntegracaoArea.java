@@ -3,54 +3,56 @@ package testeIntegracao;
 import org.junit.Test;
 
 import basica.Area;
-import dados.DAOArea;
 import dados.DAOFactory;
+import fachada.Fachada;
 import util.DadosException;
+import util.NegocioException;
 
 public class TesteIntegracaoArea {
 
 	DAOFactory daoFactory = new DAOFactory();
 	
+	Fachada fachada = new Fachada();
+	
 	
 	@Test(expected=DadosException.class)
-	public void testarInserirArea() throws DadosException{
+	public void testarInserirArea() throws DadosException, NegocioException{
 		
 		Area area = new Area();
 		area.setNumeroIdentificador("111");
-		
-		DAOArea daoArea = daoFactory.getDAOArea();
-		daoArea.insert(area);
+				
+		fachada.areaInserir(area);
 	}
 	
 	
 	@Test(expected=DadosException.class)
-	public void testaRemoverArea() throws DadosException{
+	public void testaRemoverArea() throws DadosException, NegocioException{
 		
 		Area area = new Area();
 		area.setNumeroIdentificador("111");
 		
-		DAOArea daoArea = daoFactory.getDAOArea();
-		daoArea.remove(area);
+		daoFactory.getDAOArea();
+		fachada.areaExcluir(area);
 	}
 	
 	
 	@Test(expected=DadosException.class)
-	public void testarAtualizarArea() throws DadosException{
+	public void testarAtualizarArea() throws DadosException, NegocioException{
 		
 		Area area = new Area();
-		area.setNumeroIdentificador("111");
+		area.setNumeroIdentificador("111 atualizar");
 		
-		DAOArea daoArea = daoFactory.getDAOArea();
-		daoArea.update(area);
+		daoFactory.getDAOArea();
+		fachada.areaAlterar(area);
 	}
 	
 	
 	@Test(expected=DadosException.class)
-	public void testarListarArea() throws DadosException{
+	public void testarListarArea() throws DadosException, NegocioException{
 		
 		
-		DAOArea daoArea = daoFactory.getDAOArea();
-		daoArea.getAll();
+		daoFactory.getDAOArea();
+		fachada.areaListar();
 	}
 	
 	

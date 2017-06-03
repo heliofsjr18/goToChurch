@@ -2,19 +2,20 @@ package testeIntegracao;
 
 import org.junit.Test;
 
-import basica.Area;
 import basica.Congregacao;
-import dados.DAOArea;
-import dados.DAOCongregacao;
 import dados.DAOFactory;
+import fachada.Fachada;
 import util.DadosException;
+import util.NegocioException;
 
 public class TesteIntegracaoCongregacao {
 
 	DAOFactory daoFactory = new DAOFactory();
 	
+	Fachada fachada = new Fachada();
+	
 	@Test(expected=DadosException.class)
-	public void testarInserirCongregacao() throws DadosException{
+	public void testarInserirCongregacao() throws DadosException, NegocioException{
 		
 		Congregacao congregacao = new Congregacao();
 		congregacao.setClimatizada(false);
@@ -22,12 +23,12 @@ public class TesteIntegracaoCongregacao {
 		congregacao.setNome("Teste Nome");
 		congregacao.setQtdAssentos(5);		
 		
-		DAOCongregacao daoCongregacao = daoFactory.getDAOCongregacao();
-		daoCongregacao.insert(congregacao);
+		daoFactory.getDAOCongregacao();
+		fachada.congregacaoInserir(congregacao);
 	}
 	
 	@Test(expected=DadosException.class)
-	public void testarRemoverCongregacao() throws DadosException{
+	public void testarRemoverCongregacao() throws DadosException, NegocioException{
 		
 		Congregacao congregacao = new Congregacao();
 		congregacao.setClimatizada(false);
@@ -35,28 +36,28 @@ public class TesteIntegracaoCongregacao {
 		congregacao.setNome("Teste Nome");
 		congregacao.setQtdAssentos(5);		
 		
-		DAOCongregacao daoCongregacao = daoFactory.getDAOCongregacao();
-		daoCongregacao.remove(congregacao);
+		daoFactory.getDAOCongregacao();
+		fachada.congregacaoExcluir(congregacao);
 	}
 	
 	@Test(expected=DadosException.class)
-	public void testarAtualizarCongregacao() throws DadosException{
+	public void testarAtualizarCongregacao() throws DadosException, NegocioException{
 		
 		Congregacao congregacao = new Congregacao();
 		congregacao.setClimatizada(false);
-		congregacao.setCoordenador("Teste coordenador");
+		congregacao.setCoordenador("Teste coordenador Atualizar");
 		congregacao.setNome("Teste Nome");
 		congregacao.setQtdAssentos(5);		
 		
-		DAOCongregacao daoCongregacao = daoFactory.getDAOCongregacao();
-		daoCongregacao.update(congregacao);
+		daoFactory.getDAOCongregacao();
+		fachada.congregacaoAlterar(congregacao);
 	}
 	
 	@Test(expected=DadosException.class)
-	public void testarListarCongregacao() throws DadosException{			
+	public void testarListarCongregacao() throws DadosException, NegocioException{			
 		
-		DAOCongregacao daoCongregacao = daoFactory.getDAOCongregacao();
-		daoCongregacao.getAll();
+		daoFactory.getDAOCongregacao();
+		fachada.congregacaoListar();
 	}	
 	
 }

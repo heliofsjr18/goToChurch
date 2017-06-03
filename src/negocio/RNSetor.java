@@ -15,11 +15,15 @@ public class RNSetor {
 		daoFactory = new DAOFactory();
 	}
 
-	private void verificaPreenchimento(Setor s) throws NegocioException {
+	public void verificaPreenchimento(Setor s) throws NegocioException {
 		if (s == null) {
 			throw new NegocioException("Objeto não preenchido!");
 		} else if (s.getNumeroIdentificador().isEmpty()) {
-			throw new NegocioException("Numero identificador vasio!");
+			throw new NegocioException("Numero identificador Vazio!");
+		}else if (s.getNumeroIdentificador().length() < 2) {
+			throw new NegocioException("Numero identificador Inválido!");
+		}else if (s.getNumeroIdentificador().equals("0")) {
+			throw new NegocioException("Numero identificador Inválido!");
 		}
 	}
 

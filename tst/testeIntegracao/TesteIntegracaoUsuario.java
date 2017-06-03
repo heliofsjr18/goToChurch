@@ -4,15 +4,18 @@ import org.junit.Test;
 
 import basica.Usuario;
 import dados.DAOFactory;
-import dados.DAOUsuario;
+import fachada.Fachada;
 import util.DadosException;
+import util.NegocioException;
 
 public class TesteIntegracaoUsuario {
 
 	DAOFactory daoFactory = new DAOFactory();
 	
+	Fachada fachada = new Fachada();
+	
 	@Test(expected=DadosException.class)
-	public void testeInserirUsuario() throws DadosException{
+	public void testeInserirUsuario() throws DadosException, NegocioException{
 		
 		Usuario usuario = new Usuario();
 		usuario.setCpf("Teste cpf");
@@ -21,13 +24,13 @@ public class TesteIntegracaoUsuario {
 		usuario.setSexo('t');
 		usuario.setTelefone("Teste telefone");		
 		
-		DAOUsuario daoUsuario = daoFactory.getDAOUsuario();
-		daoUsuario.insert(usuario);
+		daoFactory.getDAOUsuario();
+		fachada.usuarioInserir(usuario);
 	}
 	
 	
 	@Test(expected=DadosException.class)
-	public void testeRemoverUsuario() throws DadosException{
+	public void testeRemoverUsuario() throws DadosException, NegocioException{
 		
 		Usuario usuario = new Usuario();
 		usuario.setCpf("Teste cpf");
@@ -36,31 +39,32 @@ public class TesteIntegracaoUsuario {
 		usuario.setSexo('t');
 		usuario.setTelefone("Teste telefone");		
 		
-		DAOUsuario daoUsuario = daoFactory.getDAOUsuario();
-		daoUsuario.remove(usuario);
+		daoFactory.getDAOUsuario();
+		fachada.usuarioExcluir(usuario);
 	}
 	
 	
 	@Test(expected=DadosException.class)
-	public void testeAtualizarUsuario() throws DadosException{
+	public void testeAtualizarUsuario() throws DadosException, NegocioException{
 		
 		Usuario usuario = new Usuario();
-		usuario.setCpf("Teste cpf");
+		usuario.setId(78+14);
+		usuario.setCpf("Teste cpf Atualizar");
 		usuario.setEmail("Teste Email");
 		usuario.setNome("Teste nome");
 		usuario.setSexo('t');
 		usuario.setTelefone("Teste telefone");		
 		
-		DAOUsuario daoUsuario = daoFactory.getDAOUsuario();
-		daoUsuario.update(usuario);
+		daoFactory.getDAOUsuario();
+		fachada.usuarioExcluir(usuario);
 	}
 	
 	
 	@Test(expected=DadosException.class)
-	public void testeListarUsuario() throws DadosException{		
+	public void testeListarUsuario() throws DadosException, NegocioException{		
 		
-		DAOUsuario daoUsuario = daoFactory.getDAOUsuario();
-		daoUsuario.getAll();
+		daoFactory.getDAOUsuario();
+		fachada.usuarioListar();
 	}
 	
 }

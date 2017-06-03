@@ -1,6 +1,6 @@
 package testeUnitario;
 
-import org.junit.Before;
+
 import org.junit.Test;
 
 import basica.Area;
@@ -9,11 +9,6 @@ import negocio.RNArea;
 import util.NegocioException;
 
 public class TesteUnitarioArea extends TestCase {
-
-	@Before
-	public void IniciarHibernate() {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("goToChurchUnit");				
-	}
 
 	@Test
 	public void testeObjetoVazio() throws NegocioException{
