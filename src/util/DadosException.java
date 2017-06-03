@@ -1,5 +1,6 @@
 package util;
 
+@SuppressWarnings("serial")
 public class DadosException extends Exception {
 
 	public DadosException() {

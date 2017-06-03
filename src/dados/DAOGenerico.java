@@ -1,12 +1,11 @@
 package dados;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 
@@ -42,12 +41,12 @@ public abstract class DAOGenerico<Entidade>{
 
 	@SuppressWarnings("unchecked")
 	public final List<Entidade> getAll() throws DadosException {
-		List<Entidade> instance = null;
+		List<Entidade> instance = new ArrayList<Entidade>();
 		//EntityManager em = DAOFactory.factory.createEntityManager();
 
 		try {
 			
-			instance = (List<Entidade>) this.entityManager.createQuery("SELECT objetoGenerico FROM " + getPersistentClass().getName()).getResultList();
+			instance = (ArrayList<Entidade>) this.entityManager.createQuery("SELECT objetoGenerico FROM " + getPersistentClass().getName()).getResultList();
 			
 		} catch (Exception re) {
 			throw new DadosException(re.getMessage());

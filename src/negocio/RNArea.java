@@ -15,12 +15,21 @@ public class RNArea {
 		daoFactory = new DAOFactory();
 	}
 
-	private void verificaPreenchimento(Area a) throws NegocioException {
-		
+	public void verificaPreenchimento(Area a) throws NegocioException {
+
 		if (a == null) {
 			throw new NegocioException("Objeto não preenchido!");
 		} else if (a.getNumeroIdentificador().isEmpty()) {
-			throw new NegocioException("Nome vazio!");
+			throw new NegocioException("Numero Identificador vazio!");
+		}
+	}
+
+	public void verificaIdentificador(Area a) throws NegocioException {
+
+		if (a.getNumeroIdentificador().equals("0")) {
+			throw new NegocioException("Numero invalido!");
+		} else if (a.getNumeroIdentificador().length() < 2) {
+			throw new NegocioException("Numero invalido!");
 		}
 	}
 
