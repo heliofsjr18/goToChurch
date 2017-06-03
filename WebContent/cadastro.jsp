@@ -105,11 +105,17 @@ body {
 			</div>
 		</div>
 		<div class="field">
-			<label>Data de Nascimento</label>
-			<div class="fields">
-				<div class="twelve wide field">
+			
+			<div class="two fields">
+				<div class="field">
+					<label>Data de Nascimento</label>
 					<input type="text" name="dataNascimento"
 						placeholder="Data de Nascimento">
+				</div>
+				<div class="field">
+					<label>CPF</label>
+					<input type="text" name="cpf"
+						placeholder="CPF">
 				</div>
 			</div>
 		</div>
@@ -121,8 +127,8 @@ body {
 				 </div>
 			</div>
 			<div class="field">
-			    <label>CPF</label>
-			    <input type="text" name="cpf" placeholder="CPF">
+			    <label>Senha</label>
+			    <input type="password" name="senha" placeholder="Senha">
 			  </div>
 		</div>
 		<div class="two fields">
