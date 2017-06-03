@@ -8,14 +8,14 @@ import dados.DAOFactory;
 import util.NegocioException;
 
 public class RNCongregacao {
-	
+
 	private DAOFactory daoFactory;
 
 	public RNCongregacao() {
 		daoFactory = new DAOFactory();
 	}
 
-	private void verificaPreenchimento(Congregacao c) throws NegocioException {
+	public void verificaPreenchimento(Congregacao c) throws NegocioException {
 
 		if (c == null) {
 			throw new NegocioException("Objeto não preenchido!");
@@ -23,6 +23,23 @@ public class RNCongregacao {
 			throw new NegocioException("Nome vazio!");
 		} else if (c.getCoordenador().isEmpty()) {
 			throw new NegocioException("Coordenador vazio!");
+		}
+	}
+
+	public void validaCampos(Congregacao c) throws NegocioException {
+
+		if (c.getNome().equals("")) {
+			throw new NegocioException("Nome não Preenchido!");
+		} else if (c.getNome().length() < 3) {
+			throw new NegocioException("Nome Invalido!");
+		} else if (c.getCoordenador().equals("")) {
+			throw new NegocioException("Coordenador não foi preenchido!");
+		} else if (c.getCoordenador().length() < 3) {
+			throw new NegocioException("Coordenador Invalido!");
+		} else if (c.getQtdAssentos() < 0) {
+			throw new NegocioException("Quantidade de assentos invalida!");
+		} else if (c.getQtdAssentos() < 10) {
+			throw new NegocioException("Quantidade de assentos invalida!");
 		}
 	}
 
