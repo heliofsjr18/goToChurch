@@ -1,27 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-  ~ Hibernate, Relational Persistence for Idiomatic Java
-  ~
-  ~ License: GNU Lesser General Public License (LGPL), version 2.1 or later.
-  ~ See the lgpl.txt file in the root directory or <http://www.gnu.org/licenses/lgpl-2.1.html>.
-  -->
-
-<!-- example of a default persistence.xml -->
-<persistence xmlns="http://java.sun.com/xml/ns/persistence"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
-             version="2.0">
-    <persistence-unit name="goToChurchUnit" transaction-type="RESOURCE_LOCAL">
-       <class>org.hibernate.jpa.test.pack.defaultpar.Lighter</class> 
-        <!-- <validation-mode>CALLBACK</validation-mode> -->
-        <properties>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
-            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
-            <property name="hibernate.connection.username" value="siscentral6"/>
-            <property name="hibernate.connection.password" value="aula123"/>
-            <property name="hibernate.connection.url" value="jdbc:postgresql://pgsql04-farm53.uni5.net:5432/siscentral6"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
-            <!-- <property name="hibernate.cache.region.factory_class" value="org.hibernate.testing.cache.CachingRegionFactory" /> -->
-        </properties>
-    </persistence-unit>
+<persistence version="2.0" 
+	xmlns="http://java.sun.com/xml/ns/persistence" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="hibernatetest" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<properties>
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="javax.persistence.jdbc.driver"
+				value="com.mysql.jdbc.Driver" />
+			<property name = "javax.persistence.jdbc.user" value="root" />
+			<property name = "javax.persistence.jdbc.password" value="" />
+			<property name = "javax.persistence.jdbc.url"
+				value="jdbc:mysql://localhost:3306/produtos" />
+		</properties>
+	</persistence-unit>
 </persistence>

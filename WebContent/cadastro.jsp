@@ -49,19 +49,24 @@
 body {
 	background-color: #FFFFFF;
 }
+
 .ui.menu .item img.logo {
 	margin-right: 1.5em;
 }
+
 .main.container {
 	margin-top: 7em;
 }
+
 .wireframe {
 	margin-top: 2em;
 }
+
 .ui.footer.segment {
 	margin: 5em 0em 0em;
 	padding: 5em 0em;
 }
+
 #mapa {
 	height: 100vh;
 	width: calc(100vw - 145px);
@@ -83,18 +88,18 @@ body {
 	</div>
 
 <div class="ui container" style="position: relative; top: 100px;">
-
-	<form class="ui form">
-		<h2 class="ui dividing header">Digite as informaÃ§Ãµes de cadastro</h2>
+<%try{ %>
+	<form action="/goto_church/Usuario" class="ui form">
+		<h2 class="ui dividing header">Digite as informações de cadastro</h2>
 		<div class="field">
 			<label>Nome</label>
 			<div class="two fields">
 				<div class="field">
-					<input type="text" name="shipping[first-name]"
+					<input type="text" name="nome"
 						placeholder="Nome">
 				</div>
 				<div class="field">
-					<input type="text" name="shipping[last-name]"
+					<input type="text" name="sobrenome"
 						placeholder="Sobrenome">
 				</div>
 			</div>
@@ -135,7 +140,7 @@ body {
 			</div>
 			<div class="field">
 				<label>Sexo</label>
-				<select class="ui fluid search dropdown" name="card[expire-month]">
+				<select class="ui fluid search dropdown" name="sexo">
 					<option value="M">Masculino</option>
 					<option value="F">Feminio</option>
 					<option value="O">Outro</option>
@@ -143,15 +148,15 @@ body {
 			</div>
 		</div>
 		<div class="ui segment">
-		<h4 class="ui dividing header">EndereÃ§o</h4>
+		<h4 class="ui dividing header">Endereço</h4>
 		<div class="fields">
 			<div class="seven wide field">
 				<label>Logradouro</label> <input type="text" name="logradouro"
 					 placeholder="Logradouro">
 			</div>
 			<div class="three wide field">
-				<label>NÃºmero</label> <input type="number" name="numero" maxlength="8"
-					placeholder="NÂº">
+				<label>Número</label> <input type="number" name="numero" maxlength="8"
+					placeholder="Nº">
 			</div>
 			<div class="six wide field">
 				<div class="two fields">
@@ -177,8 +182,12 @@ body {
 				 </div>
 			</div>
 		</div>
-		<div class="ui button blue" tabindex="0">Salvar</div>
+		<!--  <div class="ui button blue" tabindex="0">Salvar</div>-->
+		<input type="submit" value="Salvar" class="ui button blue">
 	</form>
+	<%}catch (NullPointerException ex){
+		out.println("<script>alert('e = '+"+ex.getMessage()+");</script>");	
+	} %>
 	<br/>
 
 </div>

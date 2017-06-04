@@ -49,19 +49,24 @@
 body {
 	background-color: #FFFFFF;
 }
+
 .ui.menu .item img.logo {
 	margin-right: 1.5em;
 }
+
 .main.container {
 	margin-top: 7em;
 }
+
 .wireframe {
 	margin-top: 2em;
 }
+
 .ui.footer.segment {
 	margin: 5em 0em 0em;
 	padding: 5em 0em;
 }
+
 #mapa {
 	height: 100vh;
 	width: calc(100vw - 145px);
@@ -92,12 +97,12 @@ $('.ui.checkbox').checkbox();
 		<div class="ui segment">
 			<div class="two fields">
 				<div class="field">
-					<label>N√∫mero Identificador</label>
+					<label>N˙mero Identificador</label>
 					<input type="text" name="numeroIdentificador"
-						placeholder="N√∫mero">
+						placeholder="N˙mero">
 				</div>
 				<div class="field">
-					<label>√Årea</label>
+					<label>¡rea</label>
 					<input type="text" name="shipping[last-name]"
 						placeholder="Sobrenome">
 				</div>

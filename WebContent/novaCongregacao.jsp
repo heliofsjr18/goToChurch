@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta charset="utf-8">
-<title>Nova CongregaÃ§Ã£o</title>
+<title>Nova Congregação</title>
 <link rel="shortcut icon" type="image/png"
 	href="images/church-map-icon-marker.png">
 
@@ -49,19 +49,24 @@
 body {
 	background-color: #FFFFFF;
 }
+
 .ui.menu .item img.logo {
 	margin-right: 1.5em;
 }
+
 .main.container {
 	margin-top: 7em;
 }
+
 .wireframe {
 	margin-top: 2em;
 }
+
 .ui.footer.segment {
 	margin: 5em 0em 0em;
 	padding: 5em 0em;
 }
+
 #mapa {
 	height: 100vh;
 	width: calc(100vw - 145px);
@@ -87,8 +92,8 @@ $('.ui.checkbox').checkbox();
 
 <div class="ui container" style="position: relative; top: 100px;">
 
-	<form class="ui form">
-		<h2 class="ui dividing header">Cadastrar Nova CongregaÃ§Ã£o</h2>
+	<form action="/goto_church/Congregacao" class="ui form">
+		<h2 class="ui dividing header">Cadastrar Nova Congregação</h2>
 		<div class="field">
 			<label>Nome</label>
 			
@@ -114,25 +119,25 @@ $('.ui.checkbox').checkbox();
 				 </div>
 			</div>
 			<div class="field">
-			    <label for="climatizada">CongregaÃ§Ã£o Climatizada</label>
+			    <label for="climatizada">Congregação Climatizada</label>
 				<div class="inline field">
 				    <div class="ui toggle checkbox">
-				      <input id="climatizada" type="checkbox" tabindex="0" class="hidden">
+				      <input id="climatizada" type="checkbox" name="climatizada" tabindex="0" class="hidden">
 				      <label for="climatizada"></label>
 				    </div>
 			  	</div>
 			</div>
 		</div>
 		<div class="ui segment">
-		<h4 class="ui dividing header">EndereÃ§o</h4>
+		<h4 class="ui dividing header">Endereço</h4>
 		<div class="fields">
 			<div class="seven wide field">
 				<label>Logradouro</label> <input type="text" name="logradouro"
 					 placeholder="Logradouro">
 			</div>
 			<div class="three wide field">
-				<label>NÃºmero</label> <input type="number" name="numero" maxlength="8"
-					placeholder="NÂº">
+				<label>Número</label> <input type="number" name="numero" maxlength="8"
+					placeholder="Nº">
 			</div>
 			<div class="six wide field">
 				<div class="two fields">
@@ -158,7 +163,7 @@ $('.ui.checkbox').checkbox();
 				 </div>
 			</div>
 		</div>
-		<div class="ui button blue" tabindex="0">Salvar</div>
+		<input type="submit" class="ui button blue"  value="Salvar">
 	</form>
 	<br/>
 
