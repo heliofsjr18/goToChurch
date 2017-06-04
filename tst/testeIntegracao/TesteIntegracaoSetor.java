@@ -3,6 +3,7 @@ package testeIntegracao;
 import org.junit.Test;
 
 import basica.Setor;
+import basica.Usuario;
 import dados.DAOFactory;
 import fachada.Fachada;
 import util.DadosException;
@@ -17,8 +18,10 @@ public class TesteIntegracaoSetor {
 	@Test(expected=DadosException.class)
 	public void testeInserirSetor() throws DadosException, NegocioException{
 		
+		Usuario u = new Usuario();
 		Setor setor = new Setor();
 		setor.setNumeroIdentificador("111");
+		setor.setUsuario(u);
 		
 		daoFactory.getDAOSetor(); 
 		fachada.setorInserir(setor);

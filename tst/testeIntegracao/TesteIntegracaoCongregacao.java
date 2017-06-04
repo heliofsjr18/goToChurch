@@ -3,6 +3,8 @@ package testeIntegracao;
 import org.junit.Test;
 
 import basica.Congregacao;
+import basica.Endereco;
+import basica.Usuario;
 import dados.DAOFactory;
 import fachada.Fachada;
 import util.DadosException;
@@ -17,11 +19,15 @@ public class TesteIntegracaoCongregacao {
 	@Test(expected=DadosException.class)
 	public void testarInserirCongregacao() throws DadosException, NegocioException{
 		
+		Endereco e = new Endereco();
+		Usuario u = new Usuario();
 		Congregacao congregacao = new Congregacao();
 		congregacao.setClimatizada(false);
 		congregacao.setCoordenador("Teste coordenador");
 		congregacao.setNome("Teste Nome");
-		congregacao.setQtdAssentos(5);		
+		congregacao.setQtdAssentos(5);
+		congregacao.setEndereco(e);
+		congregacao.setUsuario(u);
 		
 		daoFactory.getDAOCongregacao();
 		fachada.congregacaoInserir(congregacao);
