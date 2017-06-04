@@ -1,6 +1,10 @@
 package dados;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceException;
+import javax.persistence.Query;
+
 import basica.Usuario;
 import util.DadosException;
 
@@ -11,8 +15,8 @@ public class DAOUsuario extends DAOGenerico<Usuario> implements IDAOUsuario {
 	}
 
 	@Override
-	public Usuario pesquisarLoginUsuario(Usuario u) throws DadosException{
-		/*EntityTransaction tx = this.entityManager.getTransaction();
+	public Usuario LoginUsuario(Usuario u) throws DadosException{
+		EntityTransaction tx = this.entityManager.getTransaction();
 		String consulta = "select u from Usuario u where u.senha = :senha and u.login = :login;";
 		
 		Usuario usuario;
@@ -20,10 +24,10 @@ public class DAOUsuario extends DAOGenerico<Usuario> implements IDAOUsuario {
 		try {
 			tx.begin();
 			Query q = (Query) this.entityManager.createQuery(consulta, Usuario.class);
-			((TypedQuery<Usuario>) q).setParameter("senha",u.getSenha());
-			((javax.persistence.Query) q).setParameter("login",u.getLogin());
+			q.setParameter("senha",u.getSenha());
+			q.setParameter("login",u.getLogin());
 			
-			usuario = q.getSingleResultList();
+			usuario = (Usuario) q.getSingleResult();
 			
 			tx.commit();
 			this.entityManager.close();
@@ -32,8 +36,7 @@ public class DAOUsuario extends DAOGenerico<Usuario> implements IDAOUsuario {
 			tx.rollback();
 			throw new DadosException(e.getMessage());
 		}
-		return usuario;*/
-		return null;
+		return usuario;
 	}
 
 }

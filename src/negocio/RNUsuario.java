@@ -39,6 +39,17 @@ public class RNUsuario {
 		
 	}
 	
+	public Usuario login(Usuario u) throws NegocioException{
+		try{
+			this.verificaPreenchimento(u);
+			DAOUsuario daoUsuario = daoFactory.getDAOUsuario();
+			return daoUsuario.LoginUsuario(u);
+		}catch(Exception e){
+			throw new NegocioException(e.getMessage());
+		}
+		
+	}
+	
 	public void removeUsuario(Usuario u) throws NegocioException{
 		try{
 			this.verificaPreenchimento(u);

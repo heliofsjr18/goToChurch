@@ -53,6 +53,10 @@ public class Fachada {
 	public void usuarioAlterar(Usuario u) throws NegocioException, DadosException {
 		rnUsuario.alterarUsuario(u);
 	}
+	
+	public Usuario login(Usuario u) throws NegocioException, DadosException {
+		return rnUsuario.login(u);
+	}
 
 	public void usuarioExcluir(Usuario u) throws NegocioException, DadosException {
 		rnUsuario.removeUsuario(u);

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import basica.Endereco;
+import basica.TipoUsuario;
 import basica.Usuario;
 import dados.DAOFactory;
 import fachada.Fachada;
@@ -42,23 +43,33 @@ public class login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Fachada fa = new Fachada();
-		Endereco endereco = new Endereco();
-		endereco.setBairro("Ipsep");
-		endereco.setCidade("Teste cidade");
-		endereco.setComplemento("Teste complemento");
-		endereco.setLogradouro("Teste logradouro");
-		endereco.setNumero("549");
+		Endereco e = new Endereco();
+		TipoUsuario t = new TipoUsuario();
+		t.setTipo("test");
+		Usuario usuario = new Usuario();
+		usuario.setCpf("Teste cpf");
+		usuario.setEmail("Teste Email");
+		usuario.setNome("Teste nome");
+		usuario.setSexo('t');
+		usuario.setTelefone("Teste telefone");	
 		
-		daoFactory.getDAOEndereco();
+		usuario.setTipoUsuario(t);
+		usuario.setLogin("marcelo");
+		usuario.setSenha("123");
+		
+		daoFactory.getDAOUsuario();
+		
 		
 		try {
 			
 			//fa.enderecoInserir(endereco);
-			Endereco en = fa.enderecoGet(25);
-			response.getWriter().append("Served at: " + en.getBairro());
-		} catch (Exception e) {
+			e = fa.enderecoGet(25);
+			usuario.setEndereco(e);
+			fa.usuarioInserir(usuario);
+			response.getWriter().append("Served at: Inserido com Sucesso!");
+		} catch (Exception ex) {
 			// TODO: handle exception
-			response.getWriter().append("Served at: " + e).append(request.getContextPath());
+			response.getWriter().append("Served at: " + ex).append(request.getContextPath());
 		}
 		//doGet(request, response);
 	}
