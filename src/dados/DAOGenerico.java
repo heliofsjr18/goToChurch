@@ -9,7 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 
-import util.DadosException;
 
 public abstract class DAOGenerico<Entidade>{
 
@@ -23,7 +22,7 @@ public abstract class DAOGenerico<Entidade>{
 		persistentClass = (Class<Entidade>) parameterizedType.getActualTypeArguments()[0];
 	}
 
-	public Entidade update(Entidade objeto) throws DadosException {
+	public Entidade update(Entidade objeto) {
 
 		//EntityManager em = DAOFactory.factory.createEntityManager();
 
@@ -40,23 +39,24 @@ public abstract class DAOGenerico<Entidade>{
 	}
 
 	@SuppressWarnings("unchecked")
-	public final List<Entidade> getAll() throws DadosException {
+	public final List<Entidade> getAll(){
 		List<Entidade> instance = new ArrayList<Entidade>();
 		//EntityManager em = DAOFactory.factory.createEntityManager();
 
 		try {
 			
-			instance = (ArrayList<Entidade>) this.entityManager.createQuery("SELECT objetoGenerico FROM " + getPersistentClass().getName()).getResultList();
+			//instance = (ArrayList<Entidade>) this.entityManager.createQuery("SELECT objetoGenerico FROM " + getPersistentClass().getName()).getResultList();
+			instance = (List<Entidade>) this.entityManager.createQuery("from " + getPersistentClass().getName()).getResultList();
 			
 		} catch (Exception re) {
-			throw new DadosException(re.getMessage());
+			re.printStackTrace();
 		}
 		this.entityManager.close();
 		return instance;
 	}
 
 
-	public void insert(Entidade objeto) throws DadosException {
+	public void insert(Entidade objeto){
 		//EntityManager em = DAOFactory.factory.createEntityManager();
 		EntityTransaction tx = this.entityManager.getTransaction();
 		try {
@@ -65,12 +65,11 @@ public abstract class DAOGenerico<Entidade>{
 			tx.commit();
 			this.entityManager.close();
 		} catch (PersistenceException e) {
-			tx.rollback();
-			throw new DadosException(e.getMessage());
+			tx.rollback();			
 		}
 	}
 
-	public final void insertCollection(Collection<Entidade> colecao) throws DadosException {
+	public final void insertCollection(Collection<Entidade> colecao){
 		//EntityManager em = DAOFactory.factory.createEntityManager();
 		try {
 			EntityTransaction tx = this.entityManager.getTransaction();
@@ -88,7 +87,7 @@ public abstract class DAOGenerico<Entidade>{
 		}
 	}
 
-	public final void remove(Entidade objeto) throws DadosException {
+	public final void remove(Entidade objeto){
 		//EntityManager em = DAOFactory.factory.createEntityManager();
 		EntityTransaction tx = this.entityManager.getTransaction();
 		tx.begin();

@@ -22,18 +22,8 @@ public class RNUsuario {
 			throw new NegocioException("Nome vazio!");
 		}else if(u.getEmail().isEmpty()){
 			throw new NegocioException("Email vazio!");
-		}else if(u.getNome().length() < 5){
-			throw new NegocioException("Nome Inválido!");
-		}else if(u.getEmail().length() < 5){
-			throw new NegocioException("Email Invalido!");
 		}else if(u.getCpf().isEmpty()){
 			throw new NegocioException("CPF vazio!");
-		}else if(u.getCpf().length() < 10){
-			throw new NegocioException("CPF Inválido!");
-		}else if(u.getTelefone().length() < 7){
-			throw new NegocioException("Numero de telefone Invalido!");
-		}else if(!(u.getSexo() == 'f') || !(u.getSexo() == 'm')){
-			throw new NegocioException("Sexo Invalido!");
 		}
 	}
 	
@@ -71,13 +61,12 @@ public class RNUsuario {
 	
 	public List<Usuario> listaUsuario() throws NegocioException{
 		 List<Usuario> u = null;
-		try{		
+		try{
 			DAOUsuario daoUsuario = daoFactory.getDAOUsuario();
 			u = daoUsuario.getAll();
 		}catch(Exception e){
 			throw new NegocioException(e.getMessage());
 		}
 		return u;
-	}
-	
+	}	
 }

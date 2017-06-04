@@ -23,7 +23,7 @@ public class TesteIntegracaoEndereco {
 		endereco.setCidade("Teste cidade");
 		endereco.setComplemento("Teste complemento");
 		endereco.setLogradouro("Teste logradouro");
-		endereco.setNumero("Teste Numero");
+		endereco.setNumero("Teste Numero");		
 		
 		daoFactory.getDAOEndereco();
 		fachada.enderecoInserir(endereco);
