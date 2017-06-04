@@ -2,6 +2,8 @@ package testeIntegracao;
 
 import org.junit.Test;
 
+import basica.Endereco;
+import basica.TipoUsuario;
 import basica.Usuario;
 import dados.DAOFactory;
 import fachada.Fachada;
@@ -17,12 +19,17 @@ public class TesteIntegracaoUsuario {
 	@Test(expected=DadosException.class)
 	public void testeInserirUsuario() throws DadosException, NegocioException{
 		
+		
+		Endereco e = new Endereco();
+		TipoUsuario t = new TipoUsuario();
 		Usuario usuario = new Usuario();
 		usuario.setCpf("Teste cpf");
 		usuario.setEmail("Teste Email");
 		usuario.setNome("Teste nome");
 		usuario.setSexo('t');
-		usuario.setTelefone("Teste telefone");		
+		usuario.setTelefone("Teste telefone");	
+		usuario.setEndereco(e);
+		usuario.setTipoUsuario(t);		
 		
 		daoFactory.getDAOUsuario();
 		fachada.usuarioInserir(usuario);

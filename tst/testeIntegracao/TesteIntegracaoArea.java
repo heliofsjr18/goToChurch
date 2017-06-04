@@ -3,6 +3,7 @@ package testeIntegracao;
 import org.junit.Test;
 
 import basica.Area;
+import basica.Usuario;
 import dados.DAOFactory;
 import fachada.Fachada;
 import util.DadosException;
@@ -18,8 +19,11 @@ public class TesteIntegracaoArea {
 	@Test(expected=DadosException.class)
 	public void testarInserirArea() throws DadosException, NegocioException{
 		
+		
+		Usuario u = new Usuario();
 		Area area = new Area();
 		area.setNumeroIdentificador("111");
+		area.setUsuario(u);
 				
 		fachada.areaInserir(area);
 	}

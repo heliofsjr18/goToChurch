@@ -41,9 +41,10 @@ public class Fachada {
 	 * ################################################ ## Usuario
 	 * ################################################
 	 */
-	/*public Usuario usuarioLogar(Usuario u) throws NegocioException, DadosException {
-		return rnUsuario.logar(u);
-	}*/
+	/*
+	 * public Usuario usuarioLogar(Usuario u) throws NegocioException,
+	 * DadosException { return rnUsuario.logar(u); }
+	 */
 
 	public void usuarioInserir(Usuario u) throws NegocioException, DadosException {
 		rnUsuario.inserirUsuario(u);
