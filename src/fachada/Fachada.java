@@ -53,6 +53,10 @@ public class Fachada {
 	public void usuarioAlterar(Usuario u) throws NegocioException, DadosException {
 		rnUsuario.alterarUsuario(u);
 	}
+	
+	public Usuario login(Usuario u) throws NegocioException, DadosException {
+		return rnUsuario.login(u);
+	}
 
 	public void usuarioExcluir(Usuario u) throws NegocioException, DadosException {
 		rnUsuario.removeUsuario(u);
@@ -126,6 +130,10 @@ public class Fachada {
 	 */
 	public void enderecoInserir(Endereco e) throws NegocioException, DadosException {
 		rnEndereco.inserirEndereco(e);
+	}
+	
+	public Endereco enderecoGet(Integer id) throws NegocioException, DadosException {
+		return rnEndereco.getEndereco(id);
 	}
 
 	public void enderecoAlterar(Endereco e) throws NegocioException, DadosException {

@@ -22,7 +22,7 @@ public class TesteUnitarioEndereco {
 	public void testeBairroValido() throws NegocioException{
 		
 		Endereco endereco = new Endereco();
-		endereco.setBairro("");
+		endereco.setBairro("Boa Viagem");
 		
 		RNEndereco rnEndereco = new RNEndereco();		
 		
