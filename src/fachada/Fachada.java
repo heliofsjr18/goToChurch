@@ -126,6 +126,10 @@ public class Fachada {
 	public void enderecoInserir(Endereco e) throws NegocioException, DadosException {
 		rnEndereco.inserirEndereco(e);
 	}
+	
+	public Endereco enderecoGet(Integer id) throws NegocioException, DadosException {
+		return rnEndereco.getEndereco(id);
+	}
 
 	public void enderecoAlterar(Endereco e) throws NegocioException, DadosException {
 		rnEndereco.alterarEndereco(e);
