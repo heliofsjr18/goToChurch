@@ -41,18 +41,6 @@ public class RNEndereco {
 		}
 	}
 	
-	public Endereco getEndereco(Integer id) throws NegocioException{
-		try{
-			if (id == null) {
-				throw new NegocioException("Id is Null!");
-			}
-			DAOEndereco daoEndereco = daoFactory.getDAOEndereco();
-			return daoEndereco.GetEndereco(id);
-		}catch(Exception ex){
-			throw new NegocioException(ex.getMessage());
-		}
-	}
-	
 	public void removeEndereco(Endereco e) throws NegocioException{
 		try{
 			this.verificaPreenchimento(e);

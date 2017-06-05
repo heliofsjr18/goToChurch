@@ -1,28 +1,29 @@
 package basica;
 
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity
+@Embeddable
 public class Endereco {
 
-	@Id	
+	/*@Id	
 	@GeneratedValue
-	private Integer id;
+	private Integer id;*/
 	private String numero;
 	private String logradouro;
 	private String bairro;
 	private String cidade;
 	private String complemento;
 
-	public Integer getId() {
+	/*public Integer getId() {
 		return id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
+	}*/
 
 	public String getNumero() {
 		return numero;

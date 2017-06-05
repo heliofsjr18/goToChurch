@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import basica.Endereco;
+import basica.TipoUsuario;
 import basica.Usuario;
 import fachada.Fachada;
 
@@ -46,6 +47,9 @@ public class UsuarioServlet extends HttpServlet {
 			e.setCidade(cidade);
 			e.setComplemento(complemento);
 			
+			TipoUsuario tu = new TipoUsuario();
+			tu.setId(1);
+			tu.setTipo("Admin");
 			
 			Usuario u = new Usuario();
 			u.setNome(nome);
@@ -57,10 +61,14 @@ public class UsuarioServlet extends HttpServlet {
 			u.setLogin(login);
 			u.setSenha(senha);
 			u.setEndereco(e);
+			u.setTipoUsuario(tu);
+			u.setDataNascimento(null);
+			
+			
 			System.out.println("Usuario criado");
 			System.out.println(u.getNome());
 			Fachada f = new Fachada();
-
+			
 			
 			try {
 				f.usuarioInserir(u);

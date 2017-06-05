@@ -1,6 +1,10 @@
 package fachada;
 
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.List;
+
+import com.mysql.jdbc.Connection;
 
 import basica.Usuario;
 import basica.Area;
@@ -31,20 +35,25 @@ public class Fachada {
 		this.rnUsuario = new RNUsuario();
 
 		try {
-			Class.forName("org.postgresql.Driver");
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			System.out.println("forname");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
+		}catch (Exception e) {
+			e.printStackTrace();
 		}
+		
+
 	}
 
 	/*
 	 * ################################################ ## Usuario
 	 * ################################################
 	 */
-	/*
-	 * public Usuario usuarioLogar(Usuario u) throws NegocioException,
-	 * DadosException { return rnUsuario.logar(u); }
-	 */
+	/*public Usuario usuarioLogar(Usuario u) throws NegocioException, DadosException {
+		return rnUsuario.logar(u);
+	}*/
 
 	public void usuarioInserir(Usuario u) throws NegocioException, DadosException {
 		rnUsuario.inserirUsuario(u);
@@ -52,10 +61,6 @@ public class Fachada {
 
 	public void usuarioAlterar(Usuario u) throws NegocioException, DadosException {
 		rnUsuario.alterarUsuario(u);
-	}
-	
-	public Usuario login(Usuario u) throws NegocioException, DadosException {
-		return rnUsuario.login(u);
 	}
 
 	public void usuarioExcluir(Usuario u) throws NegocioException, DadosException {
@@ -130,10 +135,6 @@ public class Fachada {
 	 */
 	public void enderecoInserir(Endereco e) throws NegocioException, DadosException {
 		rnEndereco.inserirEndereco(e);
-	}
-	
-	public Endereco enderecoGet(Integer id) throws NegocioException, DadosException {
-		return rnEndereco.getEndereco(id);
 	}
 
 	public void enderecoAlterar(Endereco e) throws NegocioException, DadosException {

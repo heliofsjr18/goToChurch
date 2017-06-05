@@ -5,6 +5,6 @@ import util.DadosException;
 
 public interface IDAOUsuario {
 
-	public Usuario LoginUsuario(Usuario u) throws DadosException;
+	public Usuario pesquisarLoginUsuario(Usuario u) throws DadosException;
 	
 }

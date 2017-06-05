@@ -92,7 +92,7 @@ $('.ui.checkbox').checkbox();
 
 <div class="ui container" style="position: relative; top: 100px;">
 
-	<form class="ui form">
+	<form action="/goto_church/Setor" class="ui form">
 		<h2 class="ui dividing header">Setor</h2>
 		<div class="ui segment">
 			<div class="two fields">
@@ -108,7 +108,7 @@ $('.ui.checkbox').checkbox();
 				</div>
 			</div>
 		</div>
-		<div class="ui button blue" tabindex="0">Salvar</div>
+		<input type="submit" class="ui button blue" value="Salvar">
 	</form>
 	<br/>
 
