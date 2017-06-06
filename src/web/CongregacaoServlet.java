@@ -1,6 +1,7 @@
 package web;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,23 +11,29 @@ import javax.servlet.http.HttpServletResponse;
 
 import basica.Congregacao;
 import basica.Endereco;
+import basica.Usuario;
 import fachada.Fachada;
 
 @WebServlet("/Congregacao")
 public class CongregacaoServlet extends HttpServlet{
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, NullPointerException {
-		
+		PrintWriter out = response.getWriter();
 		String nome = request.getParameter("nome");
 		String coordenador = request.getParameter("coordenador");
 		String quantidade = request.getParameter("qtdAcento");
 		String cli = request.getParameter("climatizada");
-		boolean climatizada;
-		
-		if(cli.equals("on")){
-			climatizada = true;
-		}else{
-			climatizada = false;
+		boolean climatizada = false;
+		try{
+			if(cli == null){
+				climatizada = false;
+			}else if(cli.equals("on")){
+				climatizada = true;
+			}else{
+				climatizada = false;
+			}
+		}catch (NullPointerException e) {
+			
 		}
 		
 		//Endereço
@@ -44,18 +51,24 @@ public class CongregacaoServlet extends HttpServlet{
 		e.setCidade(cidade);
 		e.setComplemento(complemento);
 		
+		Usuario u = new Usuario();
+		u.setId(3);
+		
 		Congregacao c = new Congregacao();
 		c.setNome(nome);
 		c.setCoordenador(coordenador);
 		c.setClimatizada(climatizada);
 		c.setQtdAssentos(Integer.parseInt(quantidade));
 		c.setEndereco(e);
+		c.setUsuario(u);
 		
 		Fachada f = new Fachada();
 		try {
 			f.congregacaoInserir(c);
+			out.println("<script>alert('Cadastrado!');</script>");
+			response.sendRedirect("ListarCongregacao");
 		} catch (Exception e2) {
-			// TODO: handle exception
+			out.println("<script>alert('"+e2.getMessage()+"')</script>");
 		}
 		
 		

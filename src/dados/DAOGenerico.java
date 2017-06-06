@@ -45,8 +45,8 @@ public abstract class DAOGenerico<Entidade>{
 		//EntityManager em = DAOFactory.factory.createEntityManager();
 
 		try {
-			
-			instance = (ArrayList<Entidade>) this.entityManager.createQuery("SELECT objetoGenerico FROM " + getPersistentClass().getName()).getResultList();
+			System.out.println(getPersistentClass().getName());
+			instance = (List<Entidade>) this.entityManager.createQuery("SELECT objetoGenerico FROM " + getPersistentClass().getName()+" objetoGenerico").getResultList();
 			
 		} catch (Exception re) {
 			throw new DadosException(re.getMessage());

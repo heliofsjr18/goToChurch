@@ -1,5 +1,7 @@
 package teste;
 
+import java.util.List;
+
 import basica.Usuario;
 import fachada.Fachada;
 import util.DadosException;
@@ -13,7 +15,7 @@ public class TestePersistenceDB {
 	public static void main(String[] args){
 		
 		
-		Usuario u = new Usuario();
+		/*Usuario u = new Usuario();
 		u.setNome("Dayvson1");
 		u.setCpf("123.123.123-00");
 		u.setEmail("nomail@nomail.com");
@@ -23,9 +25,12 @@ public class TestePersistenceDB {
 		u.setTelefone("8199999999");
 		
 		
-		Fachada f = new Fachada();
+		Fachada f = new Fachada();*/
 		try {
-			f.usuarioInserir(u);
+			List<Usuario> lu;
+			Fachada f = new Fachada();
+			lu = f.usuarioListar();
+			System.out.println(lu.get(0).getNome());
 		} catch (NegocioException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

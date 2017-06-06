@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta charset="utf-8">
-<title>Nova Congregação</title>
+<title>Lista de Congregações</title>
 <link rel="shortcut icon" type="image/png"
 	href="images/church-map-icon-marker.png">
 
@@ -77,11 +77,12 @@ body {
 }
 </style>
 <script>
-$('.ui.checkbox').checkbox();
+	$('.ui.checkbox').checkbox();
 </script>
 </head>
 <body style="background-color: #f2f2f2;">
-
+	<%@ page
+		import="javax.servlet.http.HttpSession, java.util.List, basica.Congregacao"%>
 	<div class="ui fixed inverted menu">
 		<div class="ui container">
 			<a href="#" class="header item"> <img class="logo"
@@ -90,84 +91,49 @@ $('.ui.checkbox').checkbox();
 		</div>
 	</div>
 
-<div class="ui container" style="position: relative; top: 100px;">
-<%try{ %>
-	<form action="/goto_church/Congregacao" class="ui form">
-		<h2 class="ui dividing header">Cadastrar Nova Congregação</h2>
-		<div class="field">
-			<label>Nome</label>
-			
-				<div class="field">
-					<input type="text" name="nome"
-						placeholder="Nome">
-				</div>
-		</div>
-		<div class="field">
-			<label>Coordenador</label>
-			<div class="fields">
-				<div class="twelve wide field">
-					<input type="text" name="coordenador"
-						placeholder="Coordenador">
-				</div>
-			</div>
-		</div>
-		<div class="two fields">
-			<div class="field">
-				<div class="field">
-				   <label>Quantidade de Acentos</label>
-				   <input type="number" name="qtdAcento" placeholder="Quantidade de Acentos">
-				 </div>
-			</div>
-			<div class="field">
-			    <label for="climatizada">Congregação Climatizada</label>
-				<div class="inline field">
-				    <div class="ui toggle checkbox">
-				      <input id="climatizada" type="checkbox" name="climatizada" tabindex="0" class="hidden">
-				      <label for="climatizada"></label>
-				    </div>
-			  	</div>
-			</div>
-		</div>
-		<div class="ui segment">
-		<h4 class="ui dividing header">Endereço</h4>
-		<div class="fields">
-			<div class="seven wide field">
-				<label>Logradouro</label> <input type="text" name="logradouro"
-					 placeholder="Logradouro">
-			</div>
-			<div class="three wide field">
-				<label>Número</label> <input type="number" name="numero" maxlength="8"
-					placeholder="Nº">
-			</div>
-			<div class="six wide field">
-				<div class="two fields">
-					<div class="field">
-						<label>Bairro</label>
-						<div class="field">
-						   <input type="text" name="bairro" placeholder="Bairro">
-						 </div>		
-					</div>
-					<div class="field">
-						<label>Cidade</label>
-						<input type="text" name="cidade" 
-							placeholder="Cidade">
-					</div>
-				</div>
-			</div>
-		</div>
+	<div class="ui container" style="position: relative; top: 100px;">
+		<table class="ui celled striped table">
+			<thead>
+				<tr>
+					<th colspan="4"><i class="users icon"></i> Congregações </th>
+					<th colspan="2"><a href="cadastro.jsp" class="ui button blue" style="width:100%;">Cadastrar Congregação</a></th>
+				</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td><strong>NOME</strong></td>
+				<td><strong>COORDENADOR</strong></td>
+				<td><strong>CLIMATIZADA</strong></td>
+				<td><strong>QTDE. ASSENTOS</strong></td>
+				<td> </td>
+			</tr>
+		<%
+			try {
+				HttpSession s = request.getSession(true);
+				List<Congregacao> lu = (List<Congregacao>) s.getAttribute("lista");
+				for (int x = 0; x < lu.size(); x++) {
+					//System.out.println("HTML - User "+x+" - "+lu.get(x).getNome());
+		%>
 		
-			<div class="field">
-				<div class="field">
-				   <label>Complemento</label>
-				   <input type="text" name="complemento" placeholder="Complemento">
-				 </div>
-			</div>
-		</div>
-		<input type="submit" class="ui button blue"  value="Salvar">
-	</form>
-	<%}catch(Exception ex){ out.println("<script>alert('"+ex.getMessage()+"');</script>");} %>
-	<br/>
+				<tr>
+					<td class="collapsing"><i class="user icon"></i><%out.println(lu.get(x).getNome()); %></td>
+					<td><%out.println(lu.get(x).getCoordenador()); %></td>
+					<td><%if(lu.get(x).getClimatizada()){out.println("SIM");}else{out.println("NÃO");} %></td>
+					<td><%out.println(lu.get(x).getQtdAssentos()); %></td>
+					<td class="right aligned collapsing"><a class="ui button green"><i class="write icon"></i> Editar</a></td>
+					<td class="right aligned collapsing"><a class="ui button red"><i class="remove icon"></i> Remover</a></td>
+				</tr>
+			
+		<%
+			}
+			} catch (Exception e) {
+				out.println("<script>" + e.getMessage() + "</script>");
+			}
+		%>
+		</tbody>
+		</table>
+		<br />
 
-</div>
+	</div>
 </body>
 </html>

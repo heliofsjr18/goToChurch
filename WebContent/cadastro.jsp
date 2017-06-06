@@ -138,13 +138,22 @@ body {
 				   <input type="text" name="telefone" placeholder="Telefone">
 				 </div>
 			</div>
-			<div class="field">
-				<label>Sexo</label>
-				<select class="ui fluid search dropdown" name="sexo">
-					<option value="M">Masculino</option>
-					<option value="F">Feminio</option>
-					<option value="O">Outro</option>
-				</select>    
+			<div class="two fields">
+				<div class="field">
+					<label>Sexo</label>
+					<select class="ui fluid search dropdown" name="sexo">
+						<option value="M">Masculino</option>
+						<option value="F">Feminio</option>
+						<option value="O">Outro</option>
+					</select>    
+				</div>
+				<div class="field">
+					<label>Tipo de Usuário</label>
+					<select class="ui fluid search dropdown" name="tipo">
+						<option value="2">Usuario Comum</option>
+						<option value="3">Obreiro</option>
+					</select>    
+				</div>
 			</div>
 		</div>
 		<div class="ui segment">
@@ -185,7 +194,7 @@ body {
 		<!--  <div class="ui button blue" tabindex="0">Salvar</div>-->
 		<input type="submit" value="Salvar" class="ui button blue">
 	</form>
-	<%}catch (NullPointerException ex){
+	<%}catch (Exception ex){
 		out.println("<script>alert('e = '+"+ex.getMessage()+");</script>");	
 	} %>
 	<br/>
