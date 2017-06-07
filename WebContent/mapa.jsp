@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page
+		import="javax.servlet.http.HttpSession, java.util.List, basica.Usuario"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,7 +66,19 @@
 
 </head>
 <body style="background: #1b1c1d;">
-
+<%
+	boolean adm = false;
+	HttpSession sessaoMapa = request.getSession(true);
+	if(sessaoMapa.getAttribute("usuario") != null){
+		
+		Usuario uLogado = (Usuario) sessaoMapa.getAttribute("usuario");	
+		if(uLogado.getTipoUsuario().getId() == 1){
+			adm = true;
+		}else{
+			adm = false;
+		}
+	} 
+%>
   <div class="ui fixed inverted menu">
     <div class="ui container">
       <a href="#" class="header item">
@@ -75,8 +89,9 @@
       <div class="ui simple dropdown item">
         Opções <i class="dropdown icon"></i>
         <div class="menu">
-          <a class="item" href="#">Cadastrar-se</a>
+          <a class="item" href="cadastro.jsp">Cadastrar-se</a>
           <a class="item" href="#">Entrar</a>
+          <%if(adm){ %>
           <div class="divider"></div>
           <div class="header">ADMIN</div>
           <div class="item">
@@ -91,6 +106,7 @@
             </div>
           </div>
           <a class="item" href="#">Opções Gerais</a>
+          <%} %>
         </div>
       </div>
     </div>

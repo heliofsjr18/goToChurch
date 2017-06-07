@@ -27,10 +27,12 @@ public class TestePersistenceDB {
 		
 		Fachada f = new Fachada();*/
 		try {
-			List<Usuario> lu;
+			Usuario u = new Usuario();
+			u.setLogin("dayvsondw@hotmail.com");
+			u.setSenha("senha1234");
 			Fachada f = new Fachada();
-			lu = f.usuarioListar();
-			System.out.println(lu.get(0).getNome());
+			Usuario logado = null;
+			logado = f.usuarioLogar(u);
 		} catch (NegocioException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

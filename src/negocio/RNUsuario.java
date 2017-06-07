@@ -5,6 +5,7 @@ import java.util.List;
 import basica.Usuario;
 import dados.DAOFactory;
 import dados.DAOUsuario;
+import util.DadosException;
 import util.NegocioException;
 
 public class RNUsuario {	
@@ -80,6 +81,11 @@ public class RNUsuario {
 			throw new NegocioException(e.getMessage());
 		}
 		return u;
+	}
+	
+	public Usuario logarUsuario(Usuario u) throws NegocioException, DadosException{
+		DAOUsuario daoUsuario = daoFactory.getDAOUsuario();
+		return daoUsuario.pesquisarLoginUsuario(u); 
 	}
 	
 }

@@ -70,6 +70,10 @@ public class Fachada {
 	public List<Usuario> usuarioListar() throws NegocioException, DadosException {
 		return rnUsuario.listaUsuario();
 	}
+	
+	public Usuario usuarioLogar(Usuario u) throws NegocioException, DadosException {
+		return rnUsuario.logarUsuario(u);
+	}
 	/*
 	 * ################################################ ## Usuario
 	 * ################################################

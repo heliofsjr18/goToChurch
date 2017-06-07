@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page
+		import="javax.servlet.http.HttpSession, java.util.List, basica.Usuario"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -291,6 +293,10 @@
 
 
 <!-- modal login -->
+<%
+HttpSession sessao = request.getSession(true);
+
+%>
 <div class="ui modal logar">
   <i class="close icon"></i>
   <div class="header">
@@ -306,11 +312,11 @@
       <form class="ui form">
       <div class="field">
         <label>Email</label>
-        <input type="text" name="email" placeholder="Email">
+        <input type="text" name="email" placeholder="Email" id="email">
       </div>
       <div class="field">
         <label>Senha</label>
-        <input type="password" name="senha" placeholder="Senha">
+        <input type="password" name="senha" placeholder="Senha" id="senha">
       </div>
     </form>
     </div>
@@ -320,10 +326,15 @@
     <div class="ui black deny button">
       Cancelar
     </div>
-    <div class="ui positive right labeled icon button">
+    <div class="ui positive right labeled icon button" onclick="logar()">
       Entrar
       <i class="checkmark icon"></i>
     </div>
+    <script type="text/javascript">
+    	function logar(){
+    		window.location = 'Login?email='+$("#email").val()+'&senha='+$("#senha").val();    		
+    	}
+    </script>
   </div>
 </div>
 </body>

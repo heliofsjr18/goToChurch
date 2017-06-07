@@ -92,6 +92,22 @@ body {
 	</div>
 
 	<div class="ui container" style="position: relative; top: 100px;">
+		<%
+			boolean adm = false;
+			HttpSession sessaoLista = request.getSession(true);
+			if(sessaoLista.getAttribute("usuario") != null){
+				
+				Usuario uLogado = (Usuario) sessaoLista.getAttribute("usuario");	
+				if(uLogado.getTipoUsuario().getId() == 1){
+					adm = true;
+				}else{
+					adm = false;
+				}
+			}
+			
+			if(adm){
+		%>
+		
 		<table class="ui celled striped table">
 			<thead>
 				<tr>
@@ -134,7 +150,9 @@ body {
 		</tbody>
 		</table>
 		<br />
-
+	<%}else{} %>
+	
+	
 	</div>
 </body>
 </html>
