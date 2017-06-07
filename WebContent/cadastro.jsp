@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page
+		import="javax.servlet.http.HttpSession, java.util.List, basica.Usuario"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="pt-br">
 <head>
@@ -79,6 +81,22 @@ body {
 </head>
 <body style="background-color: #f2f2f2;">
 
+<%
+			boolean adm = false;
+			HttpSession sessaoCadastro = request.getSession(true);
+			if(sessaoCadastro.getAttribute("usuario") != null){
+				
+				Usuario uLogado = (Usuario) sessaoCadastro.getAttribute("usuario");	
+				if(uLogado.getTipoUsuario().getId() == 1){
+					adm = true;
+				}else{
+					adm = false;
+				}
+			}
+			
+		%>
+
+
 	<div class="ui fixed inverted menu">
 		<div class="ui container">
 			<a href="#" class="header item"> <img class="logo"
@@ -147,13 +165,23 @@ body {
 						<option value="O">Outro</option>
 					</select>    
 				</div>
+				<%if(adm){ %>
 				<div class="field">
 					<label>Tipo de Usuário</label>
 					<select class="ui fluid search dropdown" name="tipo">
+						<option value="1">Administrador</option>
 						<option value="2">Usuario Comum</option>
 						<option value="3">Obreiro</option>
 					</select>    
 				</div>
+				<%}else{ %>
+				<div class="field">
+					<label>Tipo de Usuário</label>
+					<select class="ui fluid search dropdown" name="tipo">
+						<option value="2">Usuario Comum</option>
+					</select>    
+				</div>
+				<%} %>
 			</div>
 		</div>
 		<div class="ui segment">

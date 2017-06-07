@@ -150,7 +150,9 @@ body {
 		</tbody>
 		</table>
 		<br />
-	<%}else{} %>
+	<%}else{
+		out.println("<h1><strong>Desculpe :( <br/> <br/> Acesso Indisponível! </strong></h1>");
+	} %>
 	
 	
 	</div>
