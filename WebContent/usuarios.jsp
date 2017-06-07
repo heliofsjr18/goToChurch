@@ -113,6 +113,7 @@ body {
 				List<Usuario> lu = (List<Usuario>) s.getAttribute("lista");
 				for (int x = 0; x < lu.size(); x++) {
 					//System.out.println("HTML - User "+x+" - "+lu.get(x).getNome());
+					s.setAttribute("usuario"+x, lu.get(x));
 		%>
 		
 				<tr>
@@ -120,8 +121,8 @@ body {
 					<td><%out.println(lu.get(x).getEmail()); %></td>
 					<td><%out.println(lu.get(x).getCpf()); %></td>
 					<td><%out.println(lu.get(x).getTelefone()); %></td>
-					<td class="right aligned collapsing"><a class="ui button green"><i class="write icon"></i> Editar</a></td>
-					<td class="right aligned collapsing"><a class="ui button red"><i class="remove user icon"></i> Remover</a></td>
+					<td class="right aligned collapsing"><a class="ui button green" href="editarUsuario.jsp?objt=<%out.println("usuario"+x);%>" ><i class="write icon"></i> Editar</a></td>
+					<td class="right aligned collapsing"><a class="ui button red" href="RemoveUsuario?objeto=<%out.println("usuario"+x); %>" ><i class="remove user icon"></i> Remover</a></td>
 				</tr>
 			
 		<%

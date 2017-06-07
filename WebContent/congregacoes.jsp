@@ -95,8 +95,8 @@ body {
 		<table class="ui celled striped table">
 			<thead>
 				<tr>
-					<th colspan="4"><i class="users icon"></i> Congregações </th>
-					<th colspan="2"><a href="cadastro.jsp" class="ui button blue" style="width:100%;">Cadastrar Congregação</a></th>
+					<th colspan="4"><i class="fire icon"></i><i class="users icon"></i> Congregações </th>
+					<th colspan="2"><a href="novaCongregacao.jsp" class="ui button blue" style="width:100%;">Cadastrar Congregação</a></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -113,15 +113,16 @@ body {
 				List<Congregacao> lu = (List<Congregacao>) s.getAttribute("lista");
 				for (int x = 0; x < lu.size(); x++) {
 					//System.out.println("HTML - User "+x+" - "+lu.get(x).getNome());
+					s.setAttribute("congregacao"+x, lu.get(x));
 		%>
 		
 				<tr>
-					<td class="collapsing"><i class="user icon"></i><%out.println(lu.get(x).getNome()); %></td>
+					<td class="collapsing"><i class="fire icon"></i><%out.println(lu.get(x).getNome()); %></td>
 					<td><%out.println(lu.get(x).getCoordenador()); %></td>
 					<td><%if(lu.get(x).getClimatizada()){out.println("SIM");}else{out.println("NÃO");} %></td>
 					<td><%out.println(lu.get(x).getQtdAssentos()); %></td>
-					<td class="right aligned collapsing"><a class="ui button green"><i class="write icon"></i> Editar</a></td>
-					<td class="right aligned collapsing"><a class="ui button red"><i class="remove icon"></i> Remover</a></td>
+					<td class="right aligned collapsing"><a class="ui button green" href="editarCongregacao.jsp?objt=<%out.println("congregacao"+x);%>"><i class="write icon"></i> Editar</a></td>
+					<td class="right aligned collapsing"><a class="ui button red" href="RemoveCongregacao?objeto=<%out.println("congregacao"+x);%>"><i class="remove icon"></i> Remover</a></td>
 				</tr>
 			
 		<%
