@@ -8,21 +8,24 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import basica.Congregacao;
 import basica.Endereco;
 import basica.Usuario;
 import fachada.Fachada;
 
-@WebServlet("/Congregacao")
-public class CongregacaoServlet extends HttpServlet{
+@WebServlet("/EditaCongregacao")
+public class EditaCongregacaoServlet extends HttpServlet{
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, NullPointerException {
+		HttpSession ses = request.getSession(true);
 		PrintWriter out = response.getWriter();
 		String nome = request.getParameter("nome");
 		String coordenador = request.getParameter("coordenador");
 		String quantidade = request.getParameter("qtdAcento");
 		String cli = request.getParameter("climatizada");
+		
 		boolean climatizada = false;
 		try{
 			if(cli == null){
@@ -44,7 +47,9 @@ public class CongregacaoServlet extends HttpServlet{
 		String cidade = request.getParameter("cidade");
 		String complemento = request.getParameter("complemento");
 		
-		Endereco e = new Endereco();
+		Congregacao c = (Congregacao) ses.getAttribute("obj");
+		
+		Endereco e = c.getEndereco();
 		e.setLogradouro(logradouro);
 		e.setNumero(numero);
 		e.setBairro(bairro);
@@ -54,7 +59,7 @@ public class CongregacaoServlet extends HttpServlet{
 		Usuario u = new Usuario();
 		u.setId(3);
 		
-		Congregacao c = new Congregacao();
+		
 		c.setNome(nome);
 		c.setCoordenador(coordenador);
 		c.setClimatizada(climatizada);
@@ -64,13 +69,13 @@ public class CongregacaoServlet extends HttpServlet{
 		
 		Fachada f = new Fachada();
 		try {
-			f.congregacaoInserir(c);
-			out.println("<script>alert('Cadastrado!');</script>");
+			f.congregacaoAlterar(c);
+			out.println("<script>alert('Alterado!');</script>");
 			response.sendRedirect("ListarCongregacao");
 		} catch (Exception e2) {
 			out.println("<script>alert('"+e2.getMessage()+"')</script>");
 		}
 		
-		
 	}
+	
 }

@@ -21,7 +21,6 @@ public class Usuario {
 	private Character sexo;
 	@OneToOne
 	private TipoUsuario tipoUsuario;
-	@OneToOne
 	private Endereco endereco;
 	private String login;
 	private String senha;

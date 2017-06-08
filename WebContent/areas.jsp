@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page
+		import="javax.servlet.http.HttpSession, java.util.List, basica.Area"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="pt-br">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta charset="utf-8">
-<title>Nova Congregação</title>
+<title>Lista de Áreas</title>
 <link rel="shortcut icon" type="image/png"
 	href="images/church-map-icon-marker.png">
 
@@ -77,11 +79,11 @@ body {
 }
 </style>
 <script>
-$('.ui.checkbox').checkbox();
+	$('.ui.checkbox').checkbox();
 </script>
 </head>
 <body style="background-color: #f2f2f2;">
-
+	
 	<div class="ui fixed inverted menu">
 		<div class="ui container">
 			<a href="#" class="header item"> <img class="logo"
@@ -90,84 +92,45 @@ $('.ui.checkbox').checkbox();
 		</div>
 	</div>
 
-<div class="ui container" style="position: relative; top: 100px;">
-<%try{ %>
-	<form action="/goto_church/Congregacao" class="ui form">
-		<h2 class="ui dividing header">Cadastrar Nova Congregação</h2>
-		<div class="field">
-			<label>Nome</label>
-			
-				<div class="field">
-					<input type="text" name="nome"
-						placeholder="Nome">
-				</div>
-		</div>
-		<div class="field">
-			<label>Coordenador</label>
-			<div class="fields">
-				<div class="field" style="width:100%">
-					<input type="text" name="coordenador"
-						placeholder="Coordenador">
-				</div>
-			</div>
-		</div>
-		<div class="two fields">
-			<div class="field">
-				<div class="field">
-				   <label>Quantidade de Acentos</label>
-				   <input type="number" name="qtdAcento" placeholder="Quantidade de Acentos">
-				 </div>
-			</div>
-			<div class="field">
-			    <label for="climatizada">Congregação Climatizada</label>
-				<div class="inline field">
-				    <div class="ui toggle checkbox">
-				      <input id="climatizada" type="checkbox" name="climatizada" tabindex="0" class="hidden">
-				      <label for="climatizada"></label>
-				    </div>
-			  	</div>
-			</div>
-		</div>
-		<div class="ui segment">
-		<h4 class="ui dividing header">Endereço</h4>
-		<div class="fields">
-			<div class="seven wide field">
-				<label>Logradouro</label> <input type="text" name="logradouro"
-					 placeholder="Logradouro">
-			</div>
-			<div class="three wide field">
-				<label>Número</label> <input type="number" name="numero" maxlength="8"
-					placeholder="Nº">
-			</div>
-			<div class="six wide field">
-				<div class="two fields">
-					<div class="field">
-						<label>Bairro</label>
-						<div class="field">
-						   <input type="text" name="bairro" placeholder="Bairro">
-						 </div>		
-					</div>
-					<div class="field">
-						<label>Cidade</label>
-						<input type="text" name="cidade" 
-							placeholder="Cidade">
-					</div>
-				</div>
-			</div>
-		</div>
+	<div class="ui container" style="position: relative; top: 100px;">
+		<table class="ui celled striped table">
+			<thead>
+				<tr>
+					<th colspan="2"><i class="fire icon"></i><i class="users icon"></i> Áreas </th>
+					<th colspan="1"><a href="NovaArea" class="ui button blue" style="width:100%;">Cadastrar Área</a></th>
+				</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td><strong>Área</strong></td>
+				<td></td>
+				<td> </td>
+			</tr>
+		<%
+			try {
+				HttpSession s = request.getSession(true);
+				List<Area> lu = (List<Area>) s.getAttribute("lista");
+				for (int x = 0; x < lu.size(); x++) {
+					//System.out.println("HTML - User "+x+" - "+lu.get(x).getNome());
+					s.setAttribute("area"+x, lu.get(x));
+		%>
 		
-			<div class="field">
-				<div class="field">
-				   <label>Complemento</label>
-				   <input type="text" name="complemento" placeholder="Complemento">
-				 </div>
-			</div>
-		</div>
-		<input type="submit" class="ui button blue"  value="Salvar">
-	</form>
-	<%}catch(Exception ex){ out.println("<script>alert('"+ex.getMessage()+"');</script>");} %>
-	<br/>
+				<tr>
+					<td class="collapsing"><i class="fire icon"></i>Área <%out.print(lu.get(x).getNumeroIdentificador()); %></td>
+					<td class="right aligned collapsing"><a class="ui button green" href="editarArea.jsp?objt=<%out.println("area"+x);%>" style="width:100%;" ><i class="write icon"></i> Editar</a></td>
+					<td class="right aligned collapsing"><a class="ui button red" href="RemoveArea?objeto=<%out.print("area"+x);%>" style="width:100%;" ><i class="remove icon"></i> Remover</a></td>
+				</tr>
+			
+		<%
+			}
+			} catch (Exception e) {
+				out.println("<script>" + e.getMessage() + "</script>");
+			}
+		%>
+		</tbody>
+		</table>
+		<br />
 
-</div>
+	</div>
 </body>
 </html>

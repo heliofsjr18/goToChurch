@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page
-		import="javax.servlet.http.HttpSession, java.util.List, basica.Usuario"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="pt-br">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta charset="utf-8">
-<title>Cadastro</title>
+<title>Editar Usuário</title>
 <link rel="shortcut icon" type="image/png"
 	href="images/church-map-icon-marker.png">
 
@@ -81,22 +79,6 @@ body {
 </head>
 <body style="background-color: #f2f2f2;">
 
-<%
-			boolean adm = false;
-			HttpSession sessaoCadastro = request.getSession(true);
-			if(sessaoCadastro.getAttribute("usuario") != null){
-				
-				Usuario uLogado = (Usuario) sessaoCadastro.getAttribute("usuario");	
-				if(uLogado.getTipoUsuario().getId() == 1){
-					adm = true;
-				}else{
-					adm = false;
-				}
-			}
-			
-		%>
-
-
 	<div class="ui fixed inverted menu">
 		<div class="ui container">
 			<a href="#" class="header item"> <img class="logo"
@@ -106,19 +88,23 @@ body {
 	</div>
 
 <div class="ui container" style="position: relative; top: 100px;">
-<%try{ %>
-	<form action="/goto_church/Usuario" class="ui form">
+<%@ page
+		import="javax.servlet.http.HttpSession, basica.Usuario"%>
+<%
+HttpSession sess = request.getSession(true);
+String objt = request.getParameter("objt");
+Usuario usu = (Usuario) sess.getAttribute(objt);
+sess.setAttribute("obj", usu);
+try{ %>
+	<form action="/goto_church/EditaUsuario" class="ui form">
 		<h2 class="ui dividing header">Digite as informações de cadastro</h2>
 		<div class="field">
 			<label>Nome</label>
-			<div class="two fields">
-				<div class="field">
-					<input type="text" name="nome"
+			<div class="fields">
+				<div class="field" style="width: 100%">
+				
+					<input type="text" name="nome" value="<%out.println(usu.getNome()); %>"
 						placeholder="Nome">
-				</div>
-				<div class="field">
-					<input type="text" name="sobrenome"
-						placeholder="Sobrenome">
 				</div>
 			</div>
 		</div>
@@ -127,12 +113,12 @@ body {
 			<div class="two fields">
 				<div class="field">
 					<label>Data de Nascimento</label>
-					<input type="text" name="dataNascimento"
+					<input type="text" name="dataNascimento" value="<%out.println(String.valueOf(usu.getDataNascimento())); %>"
 						placeholder="Data de Nascimento">
 				</div>
 				<div class="field">
 					<label>CPF</label>
-					<input type="text" name="cpf"
+					<input type="text" name="cpf" value="<%out.println(usu.getCpf()); %>"
 						placeholder="CPF">
 				</div>
 			</div>
@@ -141,58 +127,77 @@ body {
 			<div class="field">
 				<div class="field">
 				   <label>Email</label>
-				   <input type="email" name="email" placeholder="Email">
+				   <input type="email" name="email" value="<%out.println(usu.getEmail()); %>" placeholder="Email">
 				 </div>
 			</div>
 			<div class="field">
 			    <label>Senha</label>
-			    <input type="password" name="senha" placeholder="Senha">
+			    <input type="password" id="senha" name="senha" value="<%out.println(usu.getSenha()); %>" placeholder="Senha">
 			  </div>
 		</div>
 		<div class="two fields">
 			<div class="field">
 				<div class="field">
 				   <label>Telefone</label>
-				   <input type="text" name="telefone" placeholder="Telefone">
+				   <input type="text" name="telefone" value="<%out.println(usu.getTelefone()); %>" placeholder="Telefone">
 				 </div>
 			</div>
 			<div class="two fields">
 				<div class="field">
 					<label>Sexo</label>
+					<%if(String.valueOf(usu.getSexo()).equals("M")){ %>
 					<select class="ui fluid search dropdown" name="sexo">
 						<option value="M">Masculino</option>
 						<option value="F">Feminio</option>
 						<option value="O">Outro</option>
 					</select>    
+					<%}else if(String.valueOf(usu.getSexo()).equals("F")){ %>
+					<select class="ui fluid search dropdown" name="sexo">
+						<option value="F">Feminio</option>
+						<option value="M">Masculino</option>
+						<option value="O">Outro</option>
+					</select>
+					<%}else{ %>
+					<select class="ui fluid search dropdown" name="sexo">
+						<option value="O">Outro</option>
+						<option value="F">Feminio</option>
+						<option value="M">Masculino</option>
+					</select>
+					<%} %>
 				</div>
-				<%if(adm){ %>
 				<div class="field">
 					<label>Tipo de Usuário</label>
+					<%if(usu.getTipoUsuario().getId() == 1){ %>
 					<select class="ui fluid search dropdown" name="tipo">
-						<option value="1">Administrador</option>
+						<option value="1">ADMIN</option>
 						<option value="2">Usuario Comum</option>
 						<option value="3">Obreiro</option>
 					</select>    
-				</div>
-				<%}else{ %>
-				<div class="field">
-					<label>Tipo de Usuário</label>
+					<%}else if(usu.getTipoUsuario().getId() == 2){ %>
 					<select class="ui fluid search dropdown" name="tipo">
 						<option value="2">Usuario Comum</option>
-					</select>    
+						<option value="1">ADMIN</option>
+						<option value="3">Obreiro</option>
+					</select>
+					<%}else{ %>
+					<select class="ui fluid search dropdown" name="tipo">
+						<option value="3">Obreiro</option>
+						<option value="1">ADMIN</option>
+						<option value="2">Usuario Comum</option>
+					</select>
+					<%} %>
 				</div>
-				<%} %>
 			</div>
 		</div>
 		<div class="ui segment">
 		<h4 class="ui dividing header">Endereço</h4>
 		<div class="fields">
 			<div class="seven wide field">
-				<label>Logradouro</label> <input type="text" name="logradouro"
+				<label>Logradouro</label> <input type="text" name="logradouro" value="<%out.println(usu.getEndereco().getLogradouro()); %>"
 					 placeholder="Logradouro">
 			</div>
 			<div class="three wide field">
-				<label>Número</label> <input type="number" name="numero" maxlength="8"
+				<label>Número</label> <input type="text" value="<%out.println(usu.getEndereco().getNumero()); %>" name="numero" maxlength="8"
 					placeholder="Nº">
 			</div>
 			<div class="six wide field">
@@ -200,12 +205,12 @@ body {
 					<div class="field">
 						<label>Bairro</label>
 						<div class="field">
-						   <input type="text" name="bairro" placeholder="Bairro">
+						   <input type="text" value="<%out.println(usu.getEndereco().getBairro()); %>" name="bairro" placeholder="Bairro">
 						 </div>		
 					</div>
 					<div class="field">
 						<label>Cidade</label>
-						<input type="text" name="cidade" 
+						<input type="text" name="cidade" value="<%out.println(usu.getEndereco().getCidade()); %>"
 							placeholder="Cidade">
 					</div>
 				</div>
@@ -215,7 +220,7 @@ body {
 			<div class="field">
 				<div class="field">
 				   <label>Complemento</label>
-				   <input type="text" name="complemento" placeholder="Complemento">
+				   <input type="text" name="complemento" value="<%out.println(usu.getEndereco().getComplemento()); %>" placeholder="Complemento">
 				 </div>
 			</div>
 		</div>

@@ -4,11 +4,14 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class DAOFactory {
-
+	
+	
 	public static final EntityManagerFactory factory;
 
 	static {
-		factory = Persistence.createEntityManagerFactory("goToChurchUnit");
+			
+		factory = Persistence.createEntityManagerFactory("gotochurch");
+		
 	}
 
 	public DAOArea getDAOArea() {

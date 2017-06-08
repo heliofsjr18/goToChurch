@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta charset="utf-8">
-<title>Nova Congregação</title>
+<title>Editar Congregação</title>
 <link rel="shortcut icon" type="image/png"
 	href="images/church-map-icon-marker.png">
 
@@ -81,7 +81,8 @@ $('.ui.checkbox').checkbox();
 </script>
 </head>
 <body style="background-color: #f2f2f2;">
-
+<%@ page
+		import="javax.servlet.http.HttpSession, basica.Congregacao"%>
 	<div class="ui fixed inverted menu">
 		<div class="ui container">
 			<a href="#" class="header item"> <img class="logo"
@@ -91,22 +92,27 @@ $('.ui.checkbox').checkbox();
 	</div>
 
 <div class="ui container" style="position: relative; top: 100px;">
-<%try{ %>
-	<form action="/goto_church/Congregacao" class="ui form">
-		<h2 class="ui dividing header">Cadastrar Nova Congregação</h2>
+<%
+HttpSession se = request.getSession(true);
+String obj = request.getParameter("objt");
+Congregacao co = (Congregacao) se.getAttribute(obj);
+se.setAttribute("obj", co);
+try{ %>
+	<form action="/goto_church/EditaCongregacao" class="ui form">
+		<h2 class="ui dividing header">Editar Congregação</h2>
 		<div class="field">
 			<label>Nome</label>
 			
 				<div class="field">
-					<input type="text" name="nome"
-						placeholder="Nome">
+					<input type="text" name="nome" value="<% out.print(co.getNome());%>"
+						placeholder="Nome" >
 				</div>
 		</div>
 		<div class="field">
 			<label>Coordenador</label>
 			<div class="fields">
-				<div class="field" style="width:100%">
-					<input type="text" name="coordenador"
+				<div class="twelve wide field">
+					<input type="text" name="coordenador" value="<% out.print(co.getCoordenador());%>"
 						placeholder="Coordenador">
 				</div>
 			</div>
@@ -115,14 +121,18 @@ $('.ui.checkbox').checkbox();
 			<div class="field">
 				<div class="field">
 				   <label>Quantidade de Acentos</label>
-				   <input type="number" name="qtdAcento" placeholder="Quantidade de Acentos">
+				   <input value="<% out.print(Integer.parseInt(""+co.getQtdAssentos()));%>" type="text" name="qtdAcento"  placeholder="Quantidade de Acentos">
 				 </div>
 			</div>
 			<div class="field">
 			    <label for="climatizada">Congregação Climatizada</label>
 				<div class="inline field">
 				    <div class="ui toggle checkbox">
-				      <input id="climatizada" type="checkbox" name="climatizada" tabindex="0" class="hidden">
+				    <%if(co.getClimatizada() == true){ %>
+				      	<input id="climatizada" type="checkbox" name="climatizada" tabindex="0" class="hidden" checked>
+				    <%}else{ %>
+				    	<input id="climatizada" type="checkbox" name="climatizada" tabindex="0" class="hidden">
+				    <%} %>
 				      <label for="climatizada"></label>
 				    </div>
 			  	</div>
@@ -132,11 +142,11 @@ $('.ui.checkbox').checkbox();
 		<h4 class="ui dividing header">Endereço</h4>
 		<div class="fields">
 			<div class="seven wide field">
-				<label>Logradouro</label> <input type="text" name="logradouro"
+				<label>Logradouro</label> <input type="text" name="logradouro" value="<% out.print(co.getEndereco().getLogradouro());%>"
 					 placeholder="Logradouro">
 			</div>
 			<div class="three wide field">
-				<label>Número</label> <input type="number" name="numero" maxlength="8"
+				<label>Número</label> <input type="text" name="numero" maxlength="8" value="<% out.print(co.getEndereco().getNumero());%>"
 					placeholder="Nº">
 			</div>
 			<div class="six wide field">
@@ -144,12 +154,12 @@ $('.ui.checkbox').checkbox();
 					<div class="field">
 						<label>Bairro</label>
 						<div class="field">
-						   <input type="text" name="bairro" placeholder="Bairro">
+						   <input type="text" name="bairro" value="<% out.print(co.getEndereco().getBairro());%>" placeholder="Bairro">
 						 </div>		
 					</div>
 					<div class="field">
 						<label>Cidade</label>
-						<input type="text" name="cidade" 
+						<input type="text" name="cidade" value="<% out.print(co.getEndereco().getCidade());%>"
 							placeholder="Cidade">
 					</div>
 				</div>
@@ -159,7 +169,7 @@ $('.ui.checkbox').checkbox();
 			<div class="field">
 				<div class="field">
 				   <label>Complemento</label>
-				   <input type="text" name="complemento" placeholder="Complemento">
+				   <input type="text" name="complemento"  value="<% out.println(co.getEndereco().getComplemento());%>" placeholder="Complemento">
 				 </div>
 			</div>
 		</div>

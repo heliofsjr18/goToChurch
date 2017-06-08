@@ -18,7 +18,6 @@ public class Congregacao {
 	private String coordenador;
 	private Integer qtdAssentos;
 	private Boolean climatizada;
-	@OneToOne
 	private Endereco endereco;
 	@OneToOne
 	private Usuario usuario;	
