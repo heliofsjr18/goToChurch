@@ -16,20 +16,19 @@ import fachada.Fachada;
 import util.DadosException;
 import util.NegocioException;
 
-@WebServlet("/ListarCongregacao")
-public class ListaCongregacaoServlet extends HttpServlet {
+@WebServlet("/NovaArea")
+public class NovaAreaServlet extends HttpServlet {
 	//
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, NullPointerException {
 		HttpSession session = request.getSession(true);
 		PrintWriter out = response.getWriter();
-		
 		List<Congregacao> lc;
 		Fachada f = new Fachada();
 		try {
 			lc = f.congregacaoListar();
 			session.setAttribute("lista",  lc);
-			response.sendRedirect("congregacoes.jsp");
+			response.sendRedirect("novaArea.jsp");
 		} catch (NegocioException e) {
 			// TODO Auto-generated catch block
 			out.println("<script>alert('"+e.getMessage()+"');</script>");

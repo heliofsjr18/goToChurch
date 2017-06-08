@@ -57,4 +57,19 @@ public class DAOUsuario extends DAOGenerico<Usuario> implements IDAOUsuario {
 		return instance.get(0);
 	}
 
+	@Override
+	public List<Usuario> pesquisarUsuarioObreiro() throws DadosException {
+		List<Usuario> instance = new ArrayList<Usuario>();
+		try {
+			
+			instance = (List<Usuario>) this.entityManager.createQuery("SELECT objetoGenerico FROM " + getPersistentClass().getName()+" objetoGenerico WHERE tipoUsuario_id = 3").getResultList();
+			
+		} catch (Exception re) {
+			throw new DadosException(re.getMessage());
+		}
+		this.entityManager.close();
+		System.out.println(instance.get(0).getNome());
+		return instance;
+	}
+
 }

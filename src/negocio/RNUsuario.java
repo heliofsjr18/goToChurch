@@ -88,4 +88,15 @@ public class RNUsuario {
 		return daoUsuario.pesquisarLoginUsuario(u); 
 	}
 	
+	public List<Usuario> listaUsuarioObreiro() throws NegocioException{
+		 List<Usuario> u = null;
+		try{		
+			DAOUsuario daoUsuario = daoFactory.getDAOUsuario();
+			u = daoUsuario.pesquisarUsuarioObreiro();
+		}catch(Exception e){
+			throw new NegocioException(e.getMessage());
+		}
+		return u;
+	}
+	
 }

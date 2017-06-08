@@ -229,9 +229,8 @@
 								<div class="menu">
 									<a class="item" href="cadastro.jsp">Usuario</a> <a class="item"
 										href="novaCongregacao.jsp">Congregação</a> <a class="item"
-										href="novoSetor.jsp">Setor</a> <a class="item"
-										href="novaArea.jsp">Área</a> <a class="item"
-										href="novoObreiro.jsp">Obreiro</a>
+										href="NovoSetor">Setor</a> <a class="item"
+										href="NovaArea">Área</a>
 								</div>
 							</div>
 							<div class="item">
@@ -239,8 +238,8 @@
 								<div class="menu">
 									<a class="item" href="ListarUsuario">Usuario</a> <a class="item"
 										href="ListarCongregacao">Congregação</a> <a class="item"
-										href="#">Setor</a> <a class="item" href="#">Área</a> <a
-										class="item" href="#">Obreiro</a>
+										href="ListarSetor">Setor</a> <a class="item" href="ListarArea">Área</a> <a
+										class="item" href="ListarObreiro">Obreiro</a>
 								</div>
 							</div>
 							<%
@@ -312,9 +311,8 @@
 							<div class="menu">
 								<a class="item" href="cadastro.jsp">Usuario</a> <a class="item"
 									href="novaCongregacao.jsp">Congregação</a> <a class="item"
-									href="novoSetor.jsp">Setor</a> <a class="item"
-									href="novaArea.jsp">Área</a> <a class="item"
-									href="novoObreiro.jsp">Obreiro</a>
+									href="NovoSetor">Setor</a> <a class="item"
+									href="NovaArea">Área</a>
 							</div>
 						</div>
 						<div class="item">
@@ -322,8 +320,8 @@
 							<div class="menu">
 								<a class="item" href="ListarUsuario">Usuario</a> <a class="item"
 									href="ListarCongregacao">Congregação</a> <a class="item"
-									href="#">Setor</a> <a class="item" href="#">Área</a> <a
-									class="item" href="#">Obreiro</a>
+									href="ListarSetor">Setor</a> <a class="item" href="ListarArea">Área</a> <a
+									class="item" href="ListarObreiro">Obreiro</a>
 							</div>
 						</div>
 						<%
@@ -400,9 +398,8 @@
 										<div class="menu">
 											<a class="item" href="cadastro.jsp">Usuario</a> <a
 												class="item" href="novaCongregacao.jsp">Congregação</a> <a
-												class="item" href="novoSetor.jsp">Setor</a> <a class="item"
-												href="novaArea.jsp">Área</a> <a class="item"
-												href="novoObreiro.jsp">Obreiro</a>
+												class="item" href="NovoSetor">Setor</a> <a class="item"
+												href="NovaArea">Área</a>
 										</div>
 									</div>
 									<div class="item">
@@ -410,8 +407,8 @@
 										<div class="menu">
 											<a class="item" href="ListarUsuario">Usuario</a> <a
 												class="item" href="ListarCongregacao">Congregação</a> <a
-												class="item" href="#">Setor</a> <a class="item" href="#">Área</a>
-											<a class="item" href="#">Obreiro</a>
+												class="item" href="ListarSetor">Setor</a> <a class="item" href="ListarArea">Área</a>
+											<a class="item" href="ListarObreiro">Obreiro</a>
 										</div>
 									</div>
 									<%
@@ -465,7 +462,7 @@
 					<div class="ui search">
 						<div class="ui icon input">
 							<input class="prompt" type="text"
-								placeholder="Pesquisar local..."> <i class="search icon"></i>
+								placeholder="Pesquisar Cidade..."> <i class="search icon"></i>
 						</div>
 						<div class="results"></div>
 					</div>
@@ -502,9 +499,9 @@
 							<i class="empty heart icon big pink"></i>Vincule-se a uma
 							congregação
 						</p>
-						<p>
+						<!-- <p>
 							<i class="camera retro icon big"></i> Adicione Fotos
-						</p>
+						</p> -->
 					</div>
 					<div class="six wide right floated column">
 						<img src="images/ft-mapa.jpg"

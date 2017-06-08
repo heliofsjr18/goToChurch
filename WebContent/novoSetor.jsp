@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page
+	import="javax.servlet.http.HttpSession, java.util.List, basica.Area"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="pt-br">
 <head>
@@ -77,7 +79,7 @@ body {
 }
 </style>
 <script>
-$('.ui.checkbox').checkbox();
+	$('.ui.checkbox').checkbox();
 </script>
 </head>
 <body style="background-color: #f2f2f2;">
@@ -90,28 +92,76 @@ $('.ui.checkbox').checkbox();
 		</div>
 	</div>
 
-<div class="ui container" style="position: relative; top: 100px;">
+	<div class="ui container" style="position: relative; top: 100px;">
 
-	<form action="/goto_church/Setor" class="ui form">
-		<h2 class="ui dividing header">Setor</h2>
-		<div class="ui segment">
-			<div class="two fields">
-				<div class="field">
-					<label>Número Identificador</label>
-					<input type="text" name="numeroIdentificador"
-						placeholder="Número">
+		<form action="/goto_church/Setor" class="ui form">
+			<h2 class="ui dividing header">Setor</h2>
+			<div class="ui segment">
+				<div class="fields" >
+					<div class="field" style="width:100%">
+						<label>Número Identificador</label> <input type="text"
+							name="numeroIdentificador" placeholder="Número">
+						<%
+							HttpSession s = request.getSession(true);
+							if (s.getAttribute("lista") != null) {
+
+								List<Area> lu = (List<Area>) s.getAttribute("lista");
+								s.setAttribute("todas", lu);
+						%>
+
+					</div>
 				</div>
-				<div class="field">
-					<label>Área</label>
-					<input type="text" name="shipping[last-name]"
-						placeholder="Sobrenome">
+				<div class="fields">
+					
+					<div class="field" style="width:100%">
+						<table class="ui celled striped table">
+							<thead>
+								<tr>
+									<th colspan="4"><i class="fire icon"></i><i
+										class="users icon"></i> Áreas</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><strong style="color: red;"> SELECIONE </strong></td>
+									<td><strong>NÚMERO</strong></td>
+								</tr>
+								<%
+									for (int x = 0; x < lu.size(); x++) {
+											//System.out.println("HTML - User "+x+" - "+lu.get(x).getNome());
+											s.setAttribute("congregacao" + x, lu.get(x));
+								%>
+								<tr>
+									<td class="collapsing">
+										<div class="inline field">
+											<div class="ui toggle checkbox">
+												<input value="<%out.print(lu.get(x).getId());%>"
+													id="congregacao<%out.print(x);%>" type="checkbox"
+													name="congregacao" tabindex="0" class="hidden" /> <label
+													for="congregacao<%out.print(x);%>"></label>
+											</div>
+										</div> <!-- <input name="congregacao" type="checkbox" value=""></td> -->
+									<td><i class="fire icon"></i>Área <%
+										out.println(lu.get(x).getNumeroIdentificador());
+									%></td>
+								</tr>
+								<%
+									}
+								%>
+							</tbody>
+						</table>
+						<br />
+						<%
+							}
+						%>
+
+					</div>
 				</div>
+				
+				<input type="submit" class="ui button blue" value="Salvar">
 			</div>
-		</div>
-		<input type="submit" class="ui button blue" value="Salvar">
-	</form>
-	<br/>
-
-</div>
+		</form>
+		<br />
+	</div>
 </body>
 </html>

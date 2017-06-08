@@ -167,13 +167,13 @@ try{ %>
 				</div>
 				<div class="field">
 					<label>Tipo de Usuário</label>
-					<%if(usu.getTipoUsuario().getId().equals("1")){ %>
+					<%if(usu.getTipoUsuario().getId() == 1){ %>
 					<select class="ui fluid search dropdown" name="tipo">
 						<option value="1">ADMIN</option>
 						<option value="2">Usuario Comum</option>
 						<option value="3">Obreiro</option>
 					</select>    
-					<%}else if(usu.getTipoUsuario().getId().equals("2")){ %>
+					<%}else if(usu.getTipoUsuario().getId() == 2){ %>
 					<select class="ui fluid search dropdown" name="tipo">
 						<option value="2">Usuario Comum</option>
 						<option value="1">ADMIN</option>

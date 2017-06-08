@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page
+		import="javax.servlet.http.HttpSession, basica.Area, basica.Congregacao, java.util.List"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="pt-br">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta charset="utf-8">
-<title>Nova Congregação</title>
+<title>Editar Congregação</title>
 <link rel="shortcut icon" type="image/png"
 	href="images/church-map-icon-marker.png">
 
@@ -91,81 +93,28 @@ $('.ui.checkbox').checkbox();
 	</div>
 
 <div class="ui container" style="position: relative; top: 100px;">
-<%try{ %>
-	<form action="/goto_church/Congregacao" class="ui form">
-		<h2 class="ui dividing header">Cadastrar Nova Congregação</h2>
+<%
+HttpSession se = request.getSession(true);
+String obj = request.getParameter("objt");
+Area area = (Area) se.getAttribute(obj);
+se.setAttribute("obj", area);
+try{ %>
+	<form action="/goto_church/EditaArea" class="ui form">
+		<h2 class="ui dividing header">Editar Congregação</h2>
 		<div class="field">
 			<label>Nome</label>
 			
 				<div class="field">
-					<input type="text" name="nome"
-						placeholder="Nome">
+					<input type="text" name="numeroIdentificador" value="<% out.print(area.getNumeroIdentificador());%>"
+						placeholder="Número" >
 				</div>
-		</div>
-		<div class="field">
-			<label>Coordenador</label>
-			<div class="fields">
-				<div class="field" style="width:100%">
-					<input type="text" name="coordenador"
-						placeholder="Coordenador">
-				</div>
-			</div>
-		</div>
-		<div class="two fields">
-			<div class="field">
-				<div class="field">
-				   <label>Quantidade de Acentos</label>
-				   <input type="number" name="qtdAcento" placeholder="Quantidade de Acentos">
-				 </div>
-			</div>
-			<div class="field">
-			    <label for="climatizada">Congregação Climatizada</label>
-				<div class="inline field">
-				    <div class="ui toggle checkbox">
-				      <input id="climatizada" type="checkbox" name="climatizada" tabindex="0" class="hidden">
-				      <label for="climatizada"></label>
-				    </div>
-			  	</div>
-			</div>
-		</div>
-		<div class="ui segment">
-		<h4 class="ui dividing header">Endereço</h4>
-		<div class="fields">
-			<div class="seven wide field">
-				<label>Logradouro</label> <input type="text" name="logradouro"
-					 placeholder="Logradouro">
-			</div>
-			<div class="three wide field">
-				<label>Número</label> <input type="number" name="numero" maxlength="8"
-					placeholder="Nº">
-			</div>
-			<div class="six wide field">
-				<div class="two fields">
-					<div class="field">
-						<label>Bairro</label>
-						<div class="field">
-						   <input type="text" name="bairro" placeholder="Bairro">
-						 </div>		
-					</div>
-					<div class="field">
-						<label>Cidade</label>
-						<input type="text" name="cidade" 
-							placeholder="Cidade">
-					</div>
-				</div>
-			</div>
 		</div>
 		
-			<div class="field">
-				<div class="field">
-				   <label>Complemento</label>
-				   <input type="text" name="complemento" placeholder="Complemento">
-				 </div>
-			</div>
-		</div>
 		<input type="submit" class="ui button blue"  value="Salvar">
 	</form>
-	<%}catch(Exception ex){ out.println("<script>alert('"+ex.getMessage()+"');</script>");} %>
+	<%
+	}catch(Exception ex){ out.println("<script>alert('"+ex.getMessage()+"');</script>");} 
+	%>
 	<br/>
 
 </div>

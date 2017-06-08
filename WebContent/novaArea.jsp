@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page
+		import="javax.servlet.http.HttpSession, java.util.List, basica.Congregacao"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="pt-br">
 <head>
@@ -101,11 +103,52 @@ $('.ui.checkbox').checkbox();
 					<input type="text" name="numeroIdentificador"
 						placeholder="Número">
 				</div>
-				<div class="field">
-					<label>Congregação</label>
-					<input type="text" name="congregacao"
-						placeholder="Congragaçao">
-				</div>
+				<%
+					HttpSession s = request.getSession(true);
+					if(s.getAttribute("lista") != null){
+						
+						List<Congregacao> lu = (List<Congregacao>) s.getAttribute("lista");
+						s.setAttribute("todas", lu);
+				%>
+				
+			</div>
+			<div class="fields">
+				<table class="ui celled striped table">
+					<thead>
+						<tr>
+							<th colspan="4"><i class="fire icon"></i><i class="users icon"></i> Congregações </th>
+						</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td><strong style="color: red;"> SELECIONE </strong></td>
+						<td><strong>NOME</strong></td>
+						<td><strong>COORDENADOR</strong></td>
+						<td><strong>QTDE. ASSENTOS</strong></td>
+					</tr>
+					<%
+					for (int x = 0; x < lu.size(); x++) {
+						//System.out.println("HTML - User "+x+" - "+lu.get(x).getNome());
+						s.setAttribute("congregacao"+x, lu.get(x));
+					%>
+					<tr>
+						<td class="collapsing">
+							<div class="inline field">
+							    <div class="ui toggle checkbox">
+							      <input value="<%out.print(lu.get(x).getId());%>" id="congregacao<%out.print(x);%>" type="checkbox" name="congregacao" tabindex="0" class="hidden"/>
+							      <label for="congregacao<%out.print(x);%>"></label>
+							    </div>
+						  	</div>
+						<!-- <input name="congregacao" type="checkbox" value=""></td> -->
+						<td ><i class="fire icon"></i><%out.println(lu.get(x).getNome()); %></td>
+						<td><%out.println(lu.get(x).getCoordenador()); %></td>
+						<td class="right aligned collapsing"><%out.println(lu.get(x).getQtdAssentos()); %></td>
+					</tr>
+					<%} %>
+					</tbody>
+					</table>
+					<br />
+					<%} %>
 			</div>
 		</div>
 		<input type="submit" class="ui button blue" value="Salvar">

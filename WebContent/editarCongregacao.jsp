@@ -104,7 +104,7 @@ try{ %>
 			<label>Nome</label>
 			
 				<div class="field">
-					<input type="text" name="nome" value="<% out.println(co.getNome());%>"
+					<input type="text" name="nome" value="<% out.print(co.getNome());%>"
 						placeholder="Nome" >
 				</div>
 		</div>
@@ -112,7 +112,7 @@ try{ %>
 			<label>Coordenador</label>
 			<div class="fields">
 				<div class="twelve wide field">
-					<input type="text" name="coordenador" value="<% out.println(co.getCoordenador());%>"
+					<input type="text" name="coordenador" value="<% out.print(co.getCoordenador());%>"
 						placeholder="Coordenador">
 				</div>
 			</div>
@@ -121,14 +121,18 @@ try{ %>
 			<div class="field">
 				<div class="field">
 				   <label>Quantidade de Acentos</label>
-				   <input value="<% System.out.println("SYS - "+co.getQtdAssentos()); out.println(Integer.parseInt(""+co.getQtdAssentos()));%>" type="text" name="qtdAcento"  placeholder="Quantidade de Acentos">
+				   <input value="<% out.print(Integer.parseInt(""+co.getQtdAssentos()));%>" type="text" name="qtdAcento"  placeholder="Quantidade de Acentos">
 				 </div>
 			</div>
 			<div class="field">
 			    <label for="climatizada">Congregação Climatizada</label>
 				<div class="inline field">
 				    <div class="ui toggle checkbox">
-				      <input id="climatizada" type="checkbox" name="climatizada" tabindex="0" class="hidden">
+				    <%if(co.getClimatizada() == true){ %>
+				      	<input id="climatizada" type="checkbox" name="climatizada" tabindex="0" class="hidden" checked>
+				    <%}else{ %>
+				    	<input id="climatizada" type="checkbox" name="climatizada" tabindex="0" class="hidden">
+				    <%} %>
 				      <label for="climatizada"></label>
 				    </div>
 			  	</div>
@@ -138,11 +142,11 @@ try{ %>
 		<h4 class="ui dividing header">Endereço</h4>
 		<div class="fields">
 			<div class="seven wide field">
-				<label>Logradouro</label> <input type="text" name="logradouro" value="<% out.println(co.getEndereco().getLogradouro());%>"
+				<label>Logradouro</label> <input type="text" name="logradouro" value="<% out.print(co.getEndereco().getLogradouro());%>"
 					 placeholder="Logradouro">
 			</div>
 			<div class="three wide field">
-				<label>Número</label> <input type="number" name="numero" maxlength="8" value="<% out.println(co.getEndereco().getNumero());%>"
+				<label>Número</label> <input type="text" name="numero" maxlength="8" value="<% out.print(co.getEndereco().getNumero());%>"
 					placeholder="Nº">
 			</div>
 			<div class="six wide field">
@@ -150,12 +154,12 @@ try{ %>
 					<div class="field">
 						<label>Bairro</label>
 						<div class="field">
-						   <input type="text" name="bairro" value="<% out.println(co.getEndereco().getBairro());%>" placeholder="Bairro">
+						   <input type="text" name="bairro" value="<% out.print(co.getEndereco().getBairro());%>" placeholder="Bairro">
 						 </div>		
 					</div>
 					<div class="field">
 						<label>Cidade</label>
-						<input type="text" name="cidade" value="<% out.println(co.getEndereco().getCidade());%>"
+						<input type="text" name="cidade" value="<% out.print(co.getEndereco().getCidade());%>"
 							placeholder="Cidade">
 					</div>
 				</div>
