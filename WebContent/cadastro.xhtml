@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<link rel="shortcut icon" type="image/png"
+		href="#{request.contextPath}/images/church-map-icon-marker.png" />
+	<!-- <link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/Semantic/dist/components/reset.css" /> 
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/Semantic/dist/components/site.css" />
+
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/Semantic/dist/components/container.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/Semantic/dist/components/grid.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/Semantic/dist/components/header.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/Semantic/dist/components/image.css" />-->
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/Semantic/dist/components/menu.css" />
+
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/Semantic/dist/components/divider.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/Semantic/dist/components/list.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/Semantic/dist/components/segment.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/Semantic/dist/components/dropdown.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/Semantic/dist/components/icon.css" />
+	<!-- <link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/Semantic/dist/semantic.min.css" /> -->
+
+
+
+
+	<style type="text/css">
+body {
+	background-color: #FFFFFF;
+}
+
+.ui.menu .item img.logo {
+	margin-right: 1.5em;
+}
+
+.main.container {
+	margin-top: 7em;
+}
+
+.wireframe {
+	margin-top: 2em;
+}
+
+.ui.footer.segment {
+	margin: 5em 0em 0em;
+	padding: 5em 0em;
+}
+
+#mapa {
+	height: 100vh;
+	width: calc(100vw - 145px);
+	position: absolute !important;
+	overflow: hidden;
+	top: 53px;
+	left: 131px;
+}
+</style>
+	<title>Novo Usuário</title>
+
+
+
+</h:head>
+<h:body>
+
+
+	<div class="ui fixed inverted menu">
+		<div class="ui container">
+			<a href="#" class="header item"> <h:graphicImage class="logo"
+					value="images/church-map-icon-marker.png" /> GoTo!Church
+			</a> <a href="index.jsp" class="item">Home</a>
+
+		</div>
+	</div>
+
+	<div class="container" style="position: relative; top: 100px;">
+
+
+		<p:panel header="Cadastro">
+			<h:form>
+				<h:panelGrid columns="2" cellpadding="2">
+					<p:outputLabel for="nome" value="Nome:" />
+					<p:inputText id="nome" />
+					<p:outputLabel for="email" value="E-mail:" />
+					<p:inputText id="email" />
+					<p:outputLabel for="phone" value="Phone:" />
+					<p:inputMask id="phone" value="#{maskView.phone}"
+						mask="(99) 99999-9999" />
+					<p:outputLabel for="cpf" value="CPF:" />
+					<p:inputMask id="cpf" value="#{maskView.ssn}" mask="999.999.999-99" />
+					<p:outputLabel for="dataNascimento" value="Date de Nascimento: " />
+					<p:inputMask id="dataNascimento" value="#{maskView.date}"
+						mask="99/99/9999" />
+
+					<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+						<p:outputLabel for="sexo" value="Sexo:" />
+						<p:selectOneRadio id="sexo" value="#{radioView.console}">
+							<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+							<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
+							<f:selectItem itemLabel="Outro" itemValue="Outro" />
+						</p:selectOneRadio>
+					</h:panelGrid>
+					<!-- <h:outputText escape="false" value="<br/>"></h:outputText> -->
+					<h:outputText></h:outputText>
+					<p:outputLabel for="numero" value="Número:" />
+					<p:inputText id="numero" />
+					<p:outputLabel for="logradouro" value="Logradouro:" />
+					<p:inputText id="logradouro" />
+					
+				</h:panelGrid>
+				
+				<p:commandButton value="Salvar" id="ajax" update=""
+					actionListener="#{buttonView.buttonAction}"
+					styleClass="ui-priority-primary" />
+				<p:commandButton value="Cancelar" id="cancelar" update=""
+					actionListener="#{buttonView.buttonAction}"
+					styleClass="ui-priority-primary" />
+			</h:form>
+		</p:panel>
+	</div>
+
+
+</h:body>
+</html>
