@@ -188,6 +188,7 @@
 <body>
 	<%
 		HttpSession sessao = request.getSession(true);
+		sessao.setMaxInactiveInterval(60000);
 		boolean adm = false;
 		boolean temSessao = false;
 		Usuario uLogado = null;
@@ -461,14 +462,14 @@
 				<h3>
 					<div class="ui search">
 						<div class="ui icon input">
-							<input class="prompt" type="text"
+							<input id="cidade" class="prompt" type="text"
 								placeholder="Pesquisar Cidade..."> <i class="search icon"></i>
 						</div>
 						<div class="results"></div>
 					</div>
 				</h3>
 				<div class="ui huge primary button"
-					onclick="window.location = 'mapa.jsp';">
+					onclick="window.location = 'ListarCongregacaoMapa?cidade='+$('#cidade').val();">
 					Pesquisar <i class="right arrow icon"></i>
 				</div>
 			</div>

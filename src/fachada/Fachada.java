@@ -182,6 +182,10 @@ public class Fachada {
 	public List<Congregacao> congregacaoListar() throws NegocioException, DadosException {
 		return rnCongregacao.listarCongregacao();
 	}
+	
+	public List<Congregacao> congregacaoListarPorCidade(String cidade) throws NegocioException, DadosException {
+		return rnCongregacao.listarCongregacaoPorCidade(cidade);
+	}
 	/*
 	 * ################################################ ## Congregacao
 	 * ################################################

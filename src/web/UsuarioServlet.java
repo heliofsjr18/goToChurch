@@ -76,8 +76,7 @@ public class UsuarioServlet extends HttpServlet {
 				response.sendRedirect("ListarUsuario");
 			} catch (Exception e2) {
 
-				out.println("<script>alert('e2 = '+" + e2.getMessage() + ");window.location = 'index.jsp';</script>");
-				System.out.println(e2.getMessage());
+				out.println("<script>alert('" + e2.getMessage() + "'); history.go(-1);</script>");
 			}
 
 

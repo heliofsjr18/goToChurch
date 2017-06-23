@@ -91,10 +91,22 @@ body {
 <%@ page
 		import="javax.servlet.http.HttpSession, basica.Usuario"%>
 <%
+boolean adm = false;
 HttpSession sess = request.getSession(true);
 String objt = request.getParameter("objt");
 Usuario usu = (Usuario) sess.getAttribute(objt);
 sess.setAttribute("obj", usu);
+if(sess.getAttribute("usuario") != null){
+	
+	Usuario uLogado = (Usuario) sess.getAttribute("usuario");	
+	if(uLogado.getTipoUsuario().getId() == 1){
+		adm = true;
+	}else{
+		adm = false;
+	}
+}
+if(adm){
+
 try{ %>
 	<form action="/goto_church/EditaUsuario" class="ui form">
 		<h2 class="ui dividing header">Digite as informações de cadastro</h2>
@@ -229,7 +241,11 @@ try{ %>
 	</form>
 	<%}catch (Exception ex){
 		out.println("<script>alert('e = '+"+ex.getMessage()+");</script>");	
-	} %>
+	}
+}else{
+	out.println("<h1><strong>Desculpe :( <br/> <br/> Acesso Indisponível! </strong></h1>");
+}
+%>
 	<br/>
 
 </div>

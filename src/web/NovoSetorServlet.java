@@ -31,12 +31,10 @@ public class NovoSetorServlet extends HttpServlet {
 			response.sendRedirect("novoSetor.jsp");
 		} catch (NegocioException e) {
 			// TODO Auto-generated catch block
-			out.println("<script>alert('"+e.getMessage()+"');</script>");
-			response.sendRedirect("index.jsp");
+			out.println("<script>alert('" + e.getMessage() + "'); history.go(-1);</script>");
 		} catch (DadosException e) {
 			// TODO Auto-generated catch block
-			out.println("<script>alert('"+e.getMessage()+"');</script>");
-			response.sendRedirect("index.jsp");
+			out.println("<script>alert('" + e.getMessage() + "'); history.go(-1);</script>");
 		}
 		
 	}

@@ -19,23 +19,23 @@ public class RNUsuario {
 	public void verificaPreenchimento(Usuario u) throws NegocioException{
 		if(u == null){
 			throw new NegocioException("Objeto não preenchido!");
-		}else if(u.getNome().isEmpty()){
+		}else if(u.getNome().isEmpty() || u.getNome().equals("")){ 
 			throw new NegocioException("Nome vazio!");
-		}else if(u.getEmail().isEmpty()){
+		}else if(u.getEmail().isEmpty() || u.getEmail().equals("")){
 			throw new NegocioException("Email vazio!");
 		}else if(u.getNome().length() < 5){
 			throw new NegocioException("Nome Inválido!");
 		}else if(u.getEmail().length() < 5){
 			throw new NegocioException("Email Invalido!");
-		}else if(u.getCpf().isEmpty()){
+		}else if(u.getCpf().isEmpty() || u.getCpf().equals("")){
 			throw new NegocioException("CPF vazio!");
 		}else if(u.getCpf().length() < 10){
 			throw new NegocioException("CPF Inválido!");
-		}else if(u.getTelefone().length() < 7){
+		}else if(u.getTelefone().length() < 7 || u.getTelefone().equals("")){
 			throw new NegocioException("Numero de telefone Invalido!");
-		}/*else if(!(u.getSexo() == 'F') || !(u.getSexo() == 'M') || !(u.getSexo() == 'O')){
-			throw new NegocioException("Sexo Invalido!");
-		}*/
+		}else if(u.getSenha().isEmpty() || u.getSenha().equals("")){
+			throw new NegocioException("Senha Invalida!");
+		}
 		
 		System.out.println("RN - "+u.getNome());
 	}

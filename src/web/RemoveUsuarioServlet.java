@@ -27,7 +27,7 @@ public class RemoveUsuarioServlet extends HttpServlet{
 			f.usuarioExcluir(u);
 			response.sendRedirect("ListarUsuario");
 		} catch (Exception e) {
-			out.println("<script>alert('"+e.getMessage()+"')</script>");
+			out.println("<script>alert('" + e.getMessage() + "'); history.go(-1);</script>");
 		}
 	}
 }

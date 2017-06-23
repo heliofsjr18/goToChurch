@@ -49,7 +49,7 @@ public class SetorServlet extends HttpServlet{
 				f.setorInserir(s);
 				response.sendRedirect("ListarSetor");
 			} catch (Exception e) {
-				out.print("<script>alert('"+e.getMessage()+"');</script>");
+				out.println("<script>alert('" + e.getMessage() + "'); history.go(-1);</script>");
 			}
 			
 	}

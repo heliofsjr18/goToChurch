@@ -1,6 +1,7 @@
 package web;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -21,7 +22,7 @@ public class ListaUsuarioObreiroServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, NullPointerException {
 		HttpSession session = request.getSession(true);
-		
+		PrintWriter out = response.getWriter();
 		List<Usuario> lu;
 		Fachada f = new Fachada();
 		try {
@@ -30,10 +31,10 @@ public class ListaUsuarioObreiroServlet extends HttpServlet {
 			response.sendRedirect("usuarios.jsp");
 		} catch (NegocioException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			out.println("<script>alert('" + e.getMessage() + "'); history.go(-1);</script>");
 		} catch (DadosException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			out.println("<script>alert('" + e.getMessage() + "'); history.go(-1);</script>");
 		}
 		
 	}

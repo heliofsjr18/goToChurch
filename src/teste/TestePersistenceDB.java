@@ -2,6 +2,7 @@ package teste;
 
 import java.util.List;
 
+import basica.Congregacao;
 import basica.Usuario;
 import fachada.Fachada;
 import util.DadosException;
@@ -27,12 +28,13 @@ public class TestePersistenceDB {
 		
 		Fachada f = new Fachada();*/
 		try {
-			Usuario u = new Usuario();
-			u.setLogin("dayvsondw@hotmail.com");
-			u.setSenha("senha1234");
+			
 			Fachada f = new Fachada();
-			Usuario logado = null;
-			logado = f.usuarioLogar(u);
+			List<Congregacao> lc = f.congregacaoListarPorCidade("escada");
+			for(int x=0; x<lc.size();x++){
+				System.out.println(lc.get(x).getNome());
+			}
+			
 		} catch (NegocioException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

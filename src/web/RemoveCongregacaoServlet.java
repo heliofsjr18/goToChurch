@@ -27,7 +27,7 @@ public class RemoveCongregacaoServlet extends HttpServlet{
 			f.congregacaoExcluir(c);
 			response.sendRedirect("ListarCongregacao");
 		} catch (Exception e) {
-			out.println("<script>alert('"+e.getMessage()+"')</script>");
+			out.println("<script>alert('" + e.getMessage() + "'); history.go(-1);</script>");
 		}
 	}
 }

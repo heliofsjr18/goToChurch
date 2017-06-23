@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page
-	import="javax.servlet.http.HttpSession, java.util.List, basica.Usuario"%>
+	import="javax.servlet.http.HttpSession, java.util.List, basica.Usuario, basica.Congregacao"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -110,11 +110,11 @@ body {
 			<div class="ui simple dropdown item">
 				Opções <i class="dropdown icon"></i>
 				<div class="menu">
-					<a class="item" href="cadastro.jsp">Cadastrar-se</a> <a
-						class="item" href="#">Entrar</a>
 					<%
 						if (adm) {
 					%>
+					<a class="item" href="cadastro.jsp">Cadastrar Usuario</a>
+					
 					<div class="divider"></div>
 					<div class="header">ADMIN</div>
 					<div class="item">
@@ -136,10 +136,11 @@ body {
 							<a class="item" href="#">Obreiro</a>
 						</div>
 					</div>
-					<a class="item" href="#">Opções Gerais</a>
+					<a class="item" href="Logout">Sair</a>
 					<%
 						}
 					%>
+					
 				</div>
 			</div>
 		</div>
@@ -225,11 +226,107 @@ body {
 		<input type="hidden" id="txtLatitude" name="txtLatitude" /> <input
 			type="hidden" id="txtLongitude" name="txtLongitude" />
 	</div>
+	<!--<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCH-hCASkACK5o5MLSuYUKkat8jPKsMiOg&amp;sensor=false"></script>-->
+	<div id="sc1">
+	<!-- <script 
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCH-hCASkACK5o5MLSuYUKkat8jPKsMiOg"></script> -->
+	
+	</div>
+	
+	
+	<script>
+		
+		var marker;
+		var markersData = [];
+		
+		function teste(tam){
+			if(markersData.length == tam){
+				var mapOptions = {
+					      //center: new google.maps.LatLng(-8.151265, -34.919923),
+					      zoom: 17,
+					      mapTypeId: 'roadmap',
+					   	};
 
+					   map = new google.maps.Map(document.getElementById('mapa'), mapOptions);
 
+					   // Cria a nova Info Window com referência à variável infoWindow.
+					   // O conteúdo da Info Window é criado na função createMarker.
+					   infoWindow = new google.maps.InfoWindow();
+
+					   // Evento que fecha a infoWindow com click no mapa.
+					   google.maps.event.addListener(map, 'click', function() {
+					      infoWindow.close();
+					   });
+					   console.log('Iniciar');
+					   // Chamada para a função que vai percorrer a informação
+					   // contida na variável markersData e criar os marcadores a mostrar no mapa
+					   displayMarkers();
+
+			}}
+		
+		function carregarNoMapa(endereco, nome, coordenador, qtd, tam) {
+	        geocoder.geocode({ 'address': endereco + ', Brasil', 'region': 'BR' }, function (results, status) {
+	            if (status == google.maps.GeocoderStatus.OK) {
+	                if (results[0]) {
+	                    var latitude = results[0].geometry.location.lat();
+	                    var longitude = results[0].geometry.location.lng();
+	 					
+	                    var json = {
+	          		      lat: latitude, 
+	          		      lng: longitude,
+	          		      nome: nome,
+	          		      morada1:coordenador,
+	          		      morada2: qtd,
+	          		      codPostal: ""+results[0].formatted_address // não colocar virgula no último item de cada marcador
+	          		   };
+	                    
+	                    markersData.push(json);
+	                    
+	                    teste(tam);
+	                    
+	                    console.log(markersData);
+	                }
+	            }
+	        });
+	        
+	    }	
+	</script>
 	<script src="js/mapa.js"></script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCH-hCASkACK5o5MLSuYUKkat8jPKsMiOg&callback=initialize"></script>
+	
+	<script>
+	var geocoder;
+		function initialize() {
+			geocoder = new google.maps.Geocoder();
+			<%
+			boolean ok = false;
+			if(sessaoMapa.getAttribute("listaCongregacao") != null){
+				
+				List<Congregacao> lic = (List<Congregacao>) sessaoMapa.getAttribute("listaCongregacao");
+				out.print("var lctam = "+lic.size());
+				for(int i=0;i<lic.size();i++){
+			%>
+				carregarNoMapa(<%out.print("'"+lic.get(i).getEndereco().getBairro()+", "+lic.get(i).getEndereco().getNumero()+", "+lic.get(i).getEndereco().getCidade()+"', '"+lic.get(i).getNome()+"', '"+lic.get(i).getCoordenador()+"', '"+lic.get(i).getQtdAssentos()+"', "+lic.size());%>);
+				console.log(markersData.length);
+				
+			<%}
+			ok = true;
+			out.print("teste("+lic.size()+");");
+			%>
+			<%}%>
+			console.log('Array');
+
+		  }
+		
+	</script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCH-hCASkACK5o5MLSuYUKkat8jPKsMiOg&callback=initialize"></script>
+	
+	
+	
+	<script>
+	
+	</script>
+	<!--<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCH-hCASkACK5o5MLSuYUKkat8jPKsMiOg&callback=initialize"></script>-->
 
 
 

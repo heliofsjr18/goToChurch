@@ -76,9 +76,8 @@ public class EditaUsuarioServlet extends HttpServlet{
 			response.sendRedirect("ListarUsuario");
 		} catch (Exception e2) {
 
-			out.println("<script>alert('+" + e2.getMessage() + "');</script>");
+			out.println("<script>alert('" + e2.getMessage() + "'); history.go(-1);</script>");
 			System.out.println(e2.getMessage());
-			response.sendRedirect("ListarUsuario");
 		}
 			
 	}

@@ -9,33 +9,6 @@
 
 
   //OBS Json deve ser montado com dados do DB
-  var markersData = [
-  {
-      lat: -8.151265, 
-      lng: -34.919923,
-      nome: "Faculdade Unibratec",
-      morada1:"Rua Diogo Cão, 125",
-      morada2: "Praia da Barra",
-      codPostal: "3830-772 Gafanha da Nazaré" // não colocar virgula no último item de cada marcador
-   },
-   {
-      lat: -8.152520,
-      lng: -34.920258,
-      nome: "Concessionária Chevrolet Autonunes",
-      morada1:"Estr. da Batalha, 1000 - Guararapes",
-      morada2: "Jaboatão dos Guararapes - PE",
-      codPostal: "54325-035" // não colocar virgula no último item de cada marcador
-   }, 
-   {
-      lat: -8.154067,
-      lng: -34.920172,
-      nome: "Estação Monte dos Guararapes",
-      morada1:"Av. Zequinha Barreto - Prazeres",
-      morada2: "Jaboatão dos Guararapes - PE",
-      codPostal: "54310-610" // não colocar virgula no último item de cada marcador
-   }
-  ];
-
 
   //Função que monta todas as posições dos marcadores do mapa
   function displayMarkers(){
@@ -49,6 +22,8 @@
      for (var i = 0; i < markersData.length; i++){
 
         var latlng = new google.maps.LatLng(markersData[i].lat, markersData[i].lng);
+        console.log(markersData[i].lat);
+        console.log(markersData[i].lng);
         var nome = markersData[i].nome;
         var morada1 = markersData[i].morada1;
         var morada2 = markersData[i].morada2;
@@ -69,7 +44,7 @@
   }
 
   function createMarker(latlng, nome, morada1, morada2, codPostal){
-   var marker = new google.maps.Marker({
+   marker = new google.maps.Marker({
       map: map,
       position: latlng,
       title: nome,
@@ -79,14 +54,14 @@
    // Evento que dá instrução à API para estar alerta ao click no marcador.
    // Define o conteúdo e abre a Info Window.
    google.maps.event.addListener(marker, 'click', function() {
-      
+      console.log('createMarker');
       // Variável que define a estrutura do HTML a inserir na Info Window.
       var iwContent = '<div id="iw_container">' +
                         '<div class="iw_title">' + 
                             '<span style="color:blue; text-transform: uppercase;"><i class="fire icon big"></i><b>'+nome+'</b></span>' + 
                         '</div><br />' +
                         '<div class="iw_content">' + 
-                            '<i class="marker icon large"></i>'+morada1 + '' +
+                            '<i class="user icon large"></i>'+morada1 + '|' +
                             morada2 + '<br />' +
                             '<i class="tag icon large"></i>'+codPostal + '<br /><br /><br />' +
                             '<div class="ui positive right labeled icon button">' +
@@ -95,33 +70,6 @@
                             '</div>' +
                         '</div>'+
                       '</div>';
-
-      /*var iwContent = '<div id="iw_container" class="ui modal logar">' +
-        '<i class="close icon"></i>' +
-        '<div class="header">' +
-          nome +
-        '</div>' +
-        '<div class="image content iw_content">' +
-          '<div class="ui medium image">' +
-            '<img src="images/church-map-icon-marker.png">' +
-          '</div>' +
-          '<div class="description">' +
-            '<div class="ui header">Informação</div>' +
-            '<p>'+morada1+'</p>' +
-            '<p>'+morada2+'</p>' +
-            '<p>'+codPostal+'</p>' +
-          '</div>' +
-        '</div>' +
-        '<div class="actions">' +
-          '<div class="ui black deny button">' +
-            'Cancelar' +
-          '</div>' +
-          '<div class="ui positive right labeled icon button">' +
-            'OK' + 
-            '<i class="checkmark icon"></i>' +
-          '</div>' +
-        '</div>' +
-      '</div>';*/
       
       // O conteúdo da variável iwContent é inserido na Info Window.
       infoWindow.setContent(iwContent);
@@ -148,7 +96,7 @@
    google.maps.event.addListener(map, 'click', function() {
       infoWindow.close();
    });
-
+   console.log('Iniciar');
    // Chamada para a função que vai percorrer a informação
    // contida na variável markersData e criar os marcadores a mostrar no mapa
    displayMarkers();
@@ -156,7 +104,10 @@
 
   /*function iniciarMapa(){
     google.maps.event.addDomListener(window, 'load', initialize);
-  }*/
+  }
+  
+  
+  inciarMapa();*/
 
 
 

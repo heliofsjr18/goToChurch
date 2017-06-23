@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page
-		import="javax.servlet.http.HttpSession, basica.Setor, java.util.List"%>
+		import="javax.servlet.http.HttpSession, basica.Setor, java.util.List, basica.Usuario"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="pt-br">
 <head>
@@ -94,10 +94,22 @@ $('.ui.checkbox').checkbox();
 
 <div class="ui container" style="position: relative; top: 100px;">
 <%
+boolean adm = false;
 HttpSession se = request.getSession(true);
 String obj = request.getParameter("objt");
 Setor setor = (Setor) se.getAttribute(obj);
 se.setAttribute("obj", setor);
+if(se.getAttribute("usuario") != null){
+	
+	Usuario uLogado = (Usuario) se.getAttribute("usuario");	
+	if(uLogado.getTipoUsuario().getId() == 1){
+		adm = true;
+	}else{
+		adm = false;
+	}
+}
+
+if(adm){
 try{ %>
 	<form action="/goto_church/EditaSetor" class="ui form">
 		<h2 class="ui dividing header">Editar Setor</h2>
@@ -114,6 +126,9 @@ try{ %>
 	</form>
 	<%
 	}catch(Exception ex){ out.println("<script>alert('"+ex.getMessage()+"');</script>");} 
+}else{
+	out.println("<h1><strong>Desculpe :( <br/> <br/> Acesso Indisponível! </strong></h1>");
+}
 	%>
 	<br/>
 

@@ -41,7 +41,7 @@ public class EditaAreaServlet extends HttpServlet{
 			out.println("<script>alert('Alterado!');</script>");
 			response.sendRedirect("ListarArea");
 		} catch (Exception e2) {
-			out.println("<script>alert('"+e2.getMessage()+"'); window.location='ListarArea';</script>");
+			out.println("<script>alert('" + e2.getMessage() + "'); history.go(-1);</script>");
 		}
 		
 	}

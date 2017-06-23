@@ -73,7 +73,7 @@ public class EditaCongregacaoServlet extends HttpServlet{
 			out.println("<script>alert('Alterado!');</script>");
 			response.sendRedirect("ListarCongregacao");
 		} catch (Exception e2) {
-			out.println("<script>alert('"+e2.getMessage()+"')</script>");
+			out.println("<script>alert('" + e2.getMessage() + "'); history.go(-1);</script>");
 		}
 		
 	}

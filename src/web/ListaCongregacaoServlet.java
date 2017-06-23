@@ -32,10 +32,10 @@ public class ListaCongregacaoServlet extends HttpServlet {
 			response.sendRedirect("congregacoes.jsp");
 		} catch (NegocioException e) {
 			// TODO Auto-generated catch block
-			out.println("<script>alert('"+e.getMessage()+"');</script>");
+			out.println("<script>alert('" + e.getMessage() + "'); history.go(-1);</script>");
 		} catch (DadosException e) {
 			// TODO Auto-generated catch block
-			out.println("<script>alert('"+e.getMessage()+"');</script>");
+			out.println("<script>alert('" + e.getMessage() + "'); history.go(-1);</script>");
 		}
 		
 	}

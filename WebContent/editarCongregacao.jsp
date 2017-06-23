@@ -82,7 +82,7 @@ $('.ui.checkbox').checkbox();
 </head>
 <body style="background-color: #f2f2f2;">
 <%@ page
-		import="javax.servlet.http.HttpSession, basica.Congregacao"%>
+		import="javax.servlet.http.HttpSession, basica.Congregacao, basica.Usuario"%>
 	<div class="ui fixed inverted menu">
 		<div class="ui container">
 			<a href="#" class="header item"> <img class="logo"
@@ -93,10 +93,22 @@ $('.ui.checkbox').checkbox();
 
 <div class="ui container" style="position: relative; top: 100px;">
 <%
+boolean adm = false;
 HttpSession se = request.getSession(true);
 String obj = request.getParameter("objt");
 Congregacao co = (Congregacao) se.getAttribute(obj);
 se.setAttribute("obj", co);
+
+if(se.getAttribute("usuario") != null){
+	
+	Usuario uLogado = (Usuario) se.getAttribute("usuario");	
+	if(uLogado.getTipoUsuario().getId() == 1){
+		adm = true;
+	}else{
+		adm = false;
+	}
+}
+if(adm){
 try{ %>
 	<form action="/goto_church/EditaCongregacao" class="ui form">
 		<h2 class="ui dividing header">Editar Congregação</h2>
@@ -175,7 +187,11 @@ try{ %>
 		</div>
 		<input type="submit" class="ui button blue"  value="Salvar">
 	</form>
-	<%}catch(Exception ex){ out.println("<script>alert('"+ex.getMessage()+"');</script>");} %>
+	<%}catch(Exception ex){ out.println("<script>alert('"+ex.getMessage()+"');</script>");} 
+}else{
+	out.println("<h1><strong>Desculpe :( <br/> <br/> Acesso Indisponível! </strong></h1>");
+}
+	%>
 	<br/>
 
 </div>

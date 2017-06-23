@@ -84,4 +84,15 @@ public class RNCongregacao {
 		}
 		return c;
 	}
+	
+	public List<Congregacao> listarCongregacaoPorCidade(String cidade) throws NegocioException {
+		List<Congregacao> c = null;
+		try {
+			DAOCongregacao daoCongregacao = daoFactory.getDAOCongregacao();
+			c = daoCongregacao.listaCongregacaoPorCidade(cidade);
+		} catch (Exception e) {
+			throw new NegocioException(e.getMessage());
+		}
+		return c;
+	}
 }

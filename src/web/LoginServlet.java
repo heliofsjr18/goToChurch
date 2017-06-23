@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
 				sessaoLoginServlet.setAttribute("usuario", logado);
 				response.sendRedirect("index.jsp");
 			} catch (Exception e) {
-				out.println("<script>alert('"+e.getMessage()+"');</script>");
+				out.println("<script>alert('" + e.getMessage() + "'); history.go(-1);</script>");
 			}
 			
 		}

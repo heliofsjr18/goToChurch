@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page
-		import="javax.servlet.http.HttpSession, java.util.List, basica.Area"%>
+		import="javax.servlet.http.HttpSession, java.util.List, basica.Area, basica.Usuario"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="pt-br">
 <head>
@@ -93,6 +93,21 @@ body {
 	</div>
 
 	<div class="ui container" style="position: relative; top: 100px;">
+	<%
+	boolean adm = false;
+	HttpSession sessaoLista = request.getSession(true);
+	if(sessaoLista.getAttribute("usuario") != null){
+		
+		Usuario uLogado = (Usuario) sessaoLista.getAttribute("usuario");	
+		if(uLogado.getTipoUsuario().getId() == 1){
+			adm = true;
+		}else{
+			adm = false;
+		}
+	}
+	
+	if(adm){
+	%>
 		<table class="ui celled striped table">
 			<thead>
 				<tr>
@@ -130,7 +145,9 @@ body {
 		</tbody>
 		</table>
 		<br />
-
+<%}else{
+			out.println("<h1><strong>Desculpe :( <br/> <br/> Acesso Indisponível! </strong></h1>");
+		} %>
 	</div>
 </body>
 </html>

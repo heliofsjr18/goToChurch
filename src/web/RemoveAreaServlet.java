@@ -29,7 +29,7 @@ public class RemoveAreaServlet extends HttpServlet{
 			out.println("<script>alert('Removido!')</script>");
 			response.sendRedirect("ListarArea");
 		} catch (Exception e) {
-			out.println("<script>alert('"+e.getMessage()+"')</script>");
+			out.println("<script>alert('" + e.getMessage() + "'); history.go(-1);</script>");
 		}
 	}
 }
