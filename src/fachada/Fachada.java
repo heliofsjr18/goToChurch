@@ -4,7 +4,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.mysql.jdbc.Connection;
+//import com.mysql.jdbc.Connection;
 
 import basica.Usuario;
 import basica.Area;
